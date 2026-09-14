@@ -127,6 +127,7 @@
     gap: 7px;
     padding: 2px 20px 6px;
     z-index: 10;
+    top: ;
   }
   .dot {
     width: 22px;
@@ -621,7 +622,7 @@
   }
   .quiz-progress-line {
     display: flex;
-    gap: 1px;
+    gap: 100px;
     width: 100%;
     /* margin-bottom: 10px; */
   }
@@ -791,7 +792,7 @@
     to { opacity: 1; transform: scale(1); }
   }
 
-  /* Ambient Floating Memory Photo Bubbles (Interactive, Enlarged & Sparkling on Hover) */
+  /* Ambient Floating Memory Photo Bubbles (Interactive, Slow Elegant Hover Zoom & Sparklers) */
   .bg-photo-bubble {
     position: fixed;
     width: clamp(120px, 11vw, 145px);
@@ -802,10 +803,11 @@
     overflow: hidden;
     pointer-events: auto; /* Clickable & Hoverable */
     cursor: pointer;
-    z-index: 15;
-    opacity: 0.94;
+    z-index: 30; /* STRICTLY above all background balloons (z-index: 2) */
+    opacity: 0.95;
     animation: bubble-float 7s infinite ease-in-out alternate;
-    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease, border-color 0.35s ease, filter 0.35s ease;
+    transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.85s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.6s ease, filter 0.6s ease;
+    will-change: transform, box-shadow;
   }
   .bg-photo-bubble::before {
     content: '';
@@ -814,12 +816,12 @@
     background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.7) 50%, transparent 60%);
     transform: rotate(25deg);
     opacity: 0;
-    transition: opacity 0.3s ease;
+    transition: opacity 0.5s ease;
     pointer-events: none;
     z-index: 3;
   }
   .bg-photo-bubble:hover {
-    transform: scale(1.35) !important;
+    transform: scale(1.32) !important;
     animation-play-state: paused;
     border-color: #fff275;
     border-width: 4px;
@@ -829,11 +831,11 @@
       0 0 100px rgba(255, 101, 132, 0.65), 
       inset 0 0 25px rgba(255, 255, 255, 0.85);
     filter: saturate(1.25) brightness(1.1);
-    z-index: 50;
+    z-index: 60;
   }
   .bg-photo-bubble:hover::before {
     opacity: 1;
-    animation: sparkle-sweep 1.2s infinite linear;
+    animation: sparkle-sweep 1.4s infinite linear;
   }
   @keyframes sparkle-sweep {
     0% { transform: translateX(-60%) translateY(-60%) rotate(25deg); }
@@ -844,7 +846,7 @@
     height: 100%;
     object-fit: cover;
     filter: saturate(1.15) brightness(1.02);
-    transition: transform 0.35s ease;
+    transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
   }
   .bg-photo-bubble:hover img {
     transform: scale(1.08);
@@ -1108,6 +1110,139 @@
     padding: 6px 36px 0;
     z-index: 2;
   }
+
+  /* ---------------- DELUXE BALLOONS (Strictly behind photos & cards) ---------------- */
+  #ambient-balloons-container {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 2; /* STRICTLY behind .bg-photo-bubble (z-index: 30) and .glass-card (z-index: 10) */
+  }
+  .festive-balloon {
+    position: fixed;
+    width: var(--b-w, 48px);
+    height: var(--b-h, 62px);
+    border-radius: 50% 50% 50% 50% / 42% 42% 58% 58%;
+    cursor: pointer;
+    pointer-events: auto;
+    user-select: none;
+    box-shadow: 
+      inset -4px -6px 14px rgba(0, 0, 0, 0.35),
+      inset 4px 5px 10px rgba(255, 255, 255, 0.45),
+      0 12px 28px rgba(0, 0, 0, 0.45),
+      0 0 25px var(--b-glow, rgba(255, 118, 117, 0.35));
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: balloon-bob var(--b-dur, 6s) infinite ease-in-out alternate;
+    will-change: transform;
+    z-index: 2;
+  }
+  .festive-balloon:hover {
+    transform: scale(1.14) rotate(4deg);
+    filter: brightness(1.12);
+  }
+  .festive-balloon.b-rose {
+    background: radial-gradient(circle at 35% 28%, #ffffff 0%, #ff6584 45%, #c4294a 100%);
+    --b-glow: rgba(255, 101, 132, 0.45);
+  }
+  .festive-balloon.b-gold {
+    background: radial-gradient(circle at 35% 28%, #ffffff 0%, #f5cf73 45%, #b8860b 100%);
+    --b-glow: rgba(245, 207, 115, 0.45);
+  }
+  .festive-balloon.b-lavender {
+    background: radial-gradient(circle at 35% 28%, #ffffff 0%, #cbb7f0 45%, #6c5ce7 100%);
+    --b-glow: rgba(162, 155, 254, 0.45);
+  }
+  .festive-balloon.b-mint {
+    background: radial-gradient(circle at 35% 28%, #ffffff 0%, #81ecec 45%, #00cec9 100%);
+    --b-glow: rgba(129, 236, 236, 0.45);
+  }
+  .festive-balloon.b-peach {
+    background: radial-gradient(circle at 35% 28%, #ffffff 0%, #fab1a0 45%, #e17055 100%);
+    --b-glow: rgba(250, 177, 160, 0.45);
+  }
+
+  .balloon-shine {
+    position: absolute;
+    top: 12%;
+    left: 18%;
+    width: 28%;
+    height: 35%;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 75%);
+    transform: rotate(-35deg);
+    pointer-events: none;
+  }
+  .balloon-knot {
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 7px;
+    height: 5px;
+    background: inherit;
+    border-radius: 2px 2px 4px 4px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+    pointer-events: none;
+  }
+  .balloon-string {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    width: 1.5px;
+    height: 50px;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.15));
+    transform-origin: top center;
+    animation: string-sway 3.2s infinite ease-in-out alternate;
+    pointer-events: none;
+  }
+  .festive-balloon.popping, .ambient-drifter.popping {
+    animation: balloon-pop-anim 0.22s forwards ease-out !important;
+    pointer-events: none;
+  }
+  @keyframes balloon-pop-anim {
+    0% { transform: scale(1); opacity: 1; }
+    50% { transform: scale(1.35); opacity: 0.85; }
+    100% { transform: scale(0.1); opacity: 0; }
+  }
+  @keyframes balloon-bob {
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-16px) translateX(var(--b-drift, 8px)) rotate(-3deg); }
+    100% { transform: translateY(-32px) translateX(calc(var(--b-drift, 8px) * -1)) rotate(4deg); }
+  }
+  @keyframes string-sway {
+    0% { transform: rotate(-8deg); }
+    100% { transform: rotate(10deg); }
+  }
+
+  /* Floating Drifter Balloons rising lazily in background */
+  .ambient-drifter {
+    position: absolute;
+    bottom: -90px;
+    border-radius: 50% 50% 50% 50% / 42% 42% 58% 58%;
+    cursor: pointer;
+    pointer-events: auto;
+    animation: drift-upwards linear forwards;
+    will-change: transform;
+    z-index: 2;
+    user-select: none;
+  }
+  .ambient-drifter:hover {
+    filter: brightness(1.15);
+    transform: scale(1.1);
+  }
+  @keyframes drift-upwards {
+    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+    6% { opacity: 0.82; }
+    85% { opacity: 0.82; }
+    100% { transform: translateY(calc(-100vh - 140px)) rotate(18deg); opacity: 0; }
+  }
+  @media (max-width: 600px) {
+    .festive-balloon {
+      transform: scale(0.72);
+      transform-origin: center;
+    }
+  }
   .bunting-flag {
     width: 18px;
     height: 26px;
@@ -1213,6 +1348,57 @@
 </div>
 <div class="bg-photo-bubble" style="bottom: 15%; right: 4%; animation-duration: 7.8s; animation-delay: 2s;">
   <img src="https://res.cloudinary.com/kalichatbot/image/upload/v1789407293/WhatsApp_Image_2026-09-14_at_10.55.20_PM_alu7uk.jpg" alt="Memory Bubble 4">
+</div>
+
+<!-- Ambient Balloons Layer (Strictly behind photos at z-index: 2, safely positioned away from photos) -->
+<div id="ambient-balloons-container" aria-label="Celebration Balloons">
+  <!-- Left Side Middle Space (Between top-left and bottom-left photos) -->
+  <div class="festive-balloon b-gold" style="top: 48%; left: 6%; --b-w: 50px; --b-h: 64px; --b-dur: 6.2s; --b-drift: 12px;" title="Tap to pop! 🎈">
+    <div class="balloon-shine"></div>
+    <div class="balloon-knot"></div>
+    <div class="balloon-string"></div>
+  </div>
+  <div class="festive-balloon b-rose" style="top: 38%; left: 9.5%; --b-w: 44px; --b-h: 56px; --b-dur: 5.4s; animation-delay: 1.2s; --b-drift: -10px;" title="Tap to pop! 🎈">
+    <div class="balloon-shine"></div>
+    <div class="balloon-knot"></div>
+    <div class="balloon-string"></div>
+  </div>
+
+  <!-- Right Side Middle Space (Between top-right and bottom-right photos) -->
+  <div class="festive-balloon b-lavender" style="top: 47%; right: 6%; --b-w: 48px; --b-h: 62px; --b-dur: 5.9s; animation-delay: 0.8s; --b-drift: -12px;" title="Tap to pop! 🎈">
+    <div class="balloon-shine"></div>
+    <div class="balloon-knot"></div>
+    <div class="balloon-string"></div>
+  </div>
+  <div class="festive-balloon b-mint" style="top: 39%; right: 10%; --b-w: 45px; --b-h: 58px; --b-dur: 6.6s; animation-delay: 2s; --b-drift: 10px;" title="Tap to pop! 🎈">
+    <div class="balloon-shine"></div>
+    <div class="balloon-knot"></div>
+    <div class="balloon-string"></div>
+  </div>
+
+  <!-- Upper Ambient Gap (Safely away from photos) -->
+  <div class="festive-balloon b-peach" style="top: 16%; left: 19%; --b-w: 46px; --b-h: 58px; --b-dur: 6.5s; animation-delay: 1.6s; --b-drift: 8px;" title="Tap to pop! 🎈">
+    <div class="balloon-shine"></div>
+    <div class="balloon-knot"></div>
+    <div class="balloon-string"></div>
+  </div>
+  <div class="festive-balloon b-rose" style="top: 17%; right: 19%; --b-w: 48px; --b-h: 62px; --b-dur: 5.7s; animation-delay: 2.4s; --b-drift: -9px;" title="Tap to pop! 🎈">
+    <div class="balloon-shine"></div>
+    <div class="balloon-knot"></div>
+    <div class="balloon-string"></div>
+  </div>
+
+  <!-- Lower Ambient Gap (Safely away from photos) -->
+  <div class="festive-balloon b-lavender" style="bottom: 14%; left: 19%; --b-w: 46px; --b-h: 58px; --b-dur: 6.8s; animation-delay: 0.9s; --b-drift: -8px;" title="Tap to pop! 🎈">
+    <div class="balloon-shine"></div>
+    <div class="balloon-knot"></div>
+    <div class="balloon-string"></div>
+  </div>
+  <div class="festive-balloon b-gold" style="bottom: 15%; right: 19%; --b-w: 48px; --b-h: 62px; --b-dur: 6.3s; animation-delay: 1.9s; --b-drift: 11px;" title="Tap to pop! 🎈">
+    <div class="balloon-shine"></div>
+    <div class="balloon-knot"></div>
+    <div class="balloon-string"></div>
+  </div>
 </div>
 
 <div id="app">
@@ -2690,6 +2876,101 @@ function initPhotoSparklers() {
   });
 }
 initPhotoSparklers();
+
+/* =========================================================================
+   AMBIENT CELEBRATION BALLOONS (Strictly behind photos with tap-to-pop)
+   ========================================================================= */
+function initAmbientBalloons() {
+  const container = document.getElementById('ambient-balloons-container');
+  if (!container) return;
+
+  function popBalloon(el, isDrifter = false) {
+    if (typeof sounds !== 'undefined' && sounds.balloonPop) {
+      sounds.balloonPop();
+    }
+    el.classList.add('popping');
+
+    const rect = el.getBoundingClientRect();
+    const originX = (rect.left + rect.width / 2) / window.innerWidth;
+    const originY = (rect.top + rect.height / 2) / window.innerHeight;
+
+    if (window.confetti) {
+      confetti({
+        particleCount: 20,
+        spread: 50,
+        origin: { x: originX, y: originY },
+        colors: ['#ff7675', '#f5cf73', '#a29bfe', '#81ecec', '#fab1a0', '#fff']
+      });
+    }
+
+    if (isDrifter) {
+      setTimeout(() => el.remove(), 230);
+    } else {
+      setTimeout(() => {
+        el.classList.remove('popping');
+        el.style.animation = 'pop-in 0.6s ease-out forwards, balloon-bob var(--b-dur, 6s) infinite ease-in-out alternate';
+      }, 2400);
+    }
+  }
+
+  // Attach pop interaction to anchored balloons
+  document.querySelectorAll('.festive-balloon').forEach(b => {
+    b.addEventListener('click', (e) => {
+      e.stopPropagation();
+      popBalloon(b, false);
+    });
+  });
+
+  // Spawn gentle background drifter balloons that rise strictly behind photos
+  const balloonThemes = [
+    { bg: 'radial-gradient(circle at 35% 28%, #ffffff 0%, #ff6584 45%, #c4294a 100%)', glow: 'rgba(255,101,132,0.4)' },
+    { bg: 'radial-gradient(circle at 35% 28%, #ffffff 0%, #f5cf73 45%, #b8860b 100%)', glow: 'rgba(245,207,115,0.4)' },
+    { bg: 'radial-gradient(circle at 35% 28%, #ffffff 0%, #cbb7f0 45%, #6c5ce7 100%)', glow: 'rgba(162,155,254,0.4)' },
+    { bg: 'radial-gradient(circle at 35% 28%, #ffffff 0%, #81ecec 45%, #00cec9 100%)', glow: 'rgba(129,236,236,0.4)' },
+    { bg: 'radial-gradient(circle at 35% 28%, #ffffff 0%, #fab1a0 45%, #e17055 100%)', glow: 'rgba(250,177,160,0.4)' }
+  ];
+
+  function spawnDrifter() {
+    if (container.querySelectorAll('.ambient-drifter').length >= 3) return;
+
+    const d = document.createElement('div');
+    d.className = 'ambient-drifter';
+    const theme = balloonThemes[Math.floor(Math.random() * balloonThemes.length)];
+    const size = Math.floor(Math.random() * 14) + 42;
+    // Spawn across safe background lanes (18% - 32% and 68% - 82%) away from corner photos
+    const leftPercent = Math.random() < 0.5 ? (Math.random() * 14 + 18) : (Math.random() * 14 + 68);
+    const duration = Math.random() * 4 + 12;
+
+    d.style.width = `${size}px`;
+    d.style.height = `${Math.round(size * 1.28)}px`;
+    d.style.left = `${leftPercent}%`;
+    d.style.background = theme.bg;
+    d.style.boxShadow = `inset -4px -6px 12px rgba(0,0,0,0.32), inset 4px 5px 10px rgba(255,255,255,0.4), 0 10px 25px rgba(0,0,0,0.4), 0 0 20px ${theme.glow}`;
+    d.style.animationDuration = `${duration}s`;
+    d.title = 'Tap to pop! 🎈';
+
+    d.innerHTML = `
+      <div class="balloon-shine"></div>
+      <div class="balloon-knot"></div>
+      <div class="balloon-string"></div>
+    `;
+
+    d.addEventListener('click', (e) => {
+      e.stopPropagation();
+      popBalloon(d, true);
+    });
+
+    container.appendChild(d);
+
+    setTimeout(() => {
+      if (d.parentNode) d.remove();
+    }, duration * 1000 + 400);
+  }
+
+  setInterval(spawnDrifter, 4500);
+  spawnDrifter();
+}
+initAmbientBalloons();
 </script>
 </body>
 </html>
