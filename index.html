@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Happy Birthday, My Love | A Special Journey</title>
+<title>Happy Birthday Love</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400;1,9..144,600&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=Sacramento&display=swap" rel="stylesheet">
@@ -193,6 +193,7 @@
     line-height: 1.18;
     margin-bottom: 6px;
     background: linear-gradient(135deg, #ffffff 40%, var(--gold));
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
   }
@@ -213,7 +214,7 @@
     display: inline-block;
   }
 
-  /* Card styling - Spacious, Grand & Elegant */
+  /* Card styling - Spacious, Grand & Zero-Scrollbar */
   .glass-card {
     background: var(--bg-card);
     border: 1px solid var(--border-card);
@@ -221,25 +222,15 @@
     -webkit-backdrop-filter: blur(20px);
     border-radius: 28px;
     box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 0 35px rgba(245, 207, 115, 0.12);
-    padding: clamp(16px, 3.5vw, 28px);
-    width: min(760px, 94vw);
-    max-height: min(720px, calc(100vh - 120px));
+    padding: clamp(14px, 3vw, 24px);
+    width: min(720px, 94vw);
+    max-height: calc(100vh - 120px);
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
-    overflow-y: auto;
-    overflow-x: hidden;
-    scrollbar-width: thin;
-    scrollbar-color: rgba(245, 207, 115, 0.3) transparent;
-  }
-  .glass-card::-webkit-scrollbar {
-    width: 6px;
-  }
-  .glass-card::-webkit-scrollbar-thumb {
-    background: rgba(245, 207, 115, 0.3);
-    border-radius: 999px;
+    overflow: hidden; /* Zero scrollbar */
   }
 
   /* Navigation Bar */
@@ -546,10 +537,10 @@
   }
   .sparkler {
     position: absolute;
-    bottom: 40px;
+    bottom: 38px;
     width: 4px;
-    height: 105px;
-    background: #bbb;
+    height: 110px;
+    background: linear-gradient(180deg, #d4a017, #777);
     border-radius: 2px;
     z-index: 8;
   }
@@ -557,38 +548,49 @@
   .sparkler-right { right: calc(50% - 138px); transform: rotate(15deg); }
   .spark-core {
     position: absolute;
-    top: -6px;
-    left: -4px;
-    width: 12px;
-    height: 12px;
-    background: #fff;
+    top: -8px;
+    left: -5px;
+    width: 14px;
+    height: 14px;
+    background: #ffffff;
     border-radius: 50%;
-    box-shadow: 0 0 15px #ffd700, 0 0 30px #ff6b6b;
-    display: none;
-  }
-  .sparkler.ignited .spark-core {
-    display: block;
-    animation: sizzle-pulse 0.1s infinite alternate;
+    box-shadow: 0 0 16px #ffd700, 0 0 32px #ff9f43, 0 0 50px #ff5252;
+    display: block !important;
+    animation: sizzle-pulse 0.12s infinite alternate;
   }
   @keyframes sizzle-pulse {
-    from { transform: scale(0.85); box-shadow: 0 0 10px #ffd700; }
-    to { transform: scale(1.3); box-shadow: 0 0 25px #fff, 0 0 40px #ff9f43; }
+    from { transform: scale(0.9); box-shadow: 0 0 12px #ffd700, 0 0 24px #ff9f43; }
+    to { transform: scale(1.35); box-shadow: 0 0 28px #fff, 0 0 45px #ff9f43, 0 0 60px #ffd700; }
+  }
+  .cake-hint-badge {
+    margin-top: 10px;
+    font-size: 0.88rem;
+    color: var(--gold);
+    background: rgba(245, 207, 115, 0.08);
+    border: 1px dashed rgba(245, 207, 115, 0.35);
+    border-radius: 999px;
+    padding: 6px 16px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    animation: float-slow 2s infinite ease-in-out alternate;
+    cursor: pointer;
   }
   .cake-wish-banner {
     position: absolute;
-    top: 26%;
-    background: rgba(18, 10, 32, 0.95);
+    top: 24%;
+    background: rgba(18, 10, 32, 0.96);
     border: 2px solid var(--gold);
-    border-radius: 18px;
-    padding: 14px 20px;
+    border-radius: 20px;
+    padding: 16px 24px;
     text-align: center;
-    box-shadow: 0 15px 35px rgba(0,0,0,0.8), 0 0 25px rgba(245, 207, 115, 0.35);
+    box-shadow: 0 18px 45px rgba(0,0,0,0.85), 0 0 35px rgba(245, 207, 115, 0.45);
     transform: scale(0.8);
     opacity: 0;
     pointer-events: none;
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    z-index: 20;
-    max-width: 380px;
+    z-index: 25;
+    max-width: 420px;
   }
   .cake-wish-banner.show {
     transform: scale(1);
@@ -597,54 +599,14 @@
   }
   .banner-title {
     font-family: 'Fraunces', serif;
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     color: var(--gold);
-    margin-bottom: 4px;
+    margin-bottom: 6px;
   }
   .banner-msg {
-    font-size: 0.88rem;
+    font-size: 0.92rem;
     color: var(--cream);
-    line-height: 1.4;
-  }
-  .cake-toolbar {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-    max-width: 520px;
-  }
-  .cake-tool-btn {
-    background: rgba(255, 255, 255, 0.07);
-    border: 1px solid rgba(255, 255, 255, 0.16);
-    color: var(--cream);
-    padding: 7px 15px;
-    border-radius: 999px;
-    font-size: 0.84rem;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  .cake-tool-btn:hover {
-    background: rgba(245, 207, 115, 0.18);
-    border-color: var(--gold);
-    transform: translateY(-2px);
-    color: var(--gold);
-  }
-  .cake-tool-btn.active {
-    background: linear-gradient(135deg, rgba(245, 207, 115, 0.3), rgba(255, 101, 132, 0.3));
-    border-color: var(--gold);
-    color: var(--gold);
-    box-shadow: 0 0 12px var(--gold-glow);
-  }
-  .cake-primary-actions {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 4px;
+    line-height: 1.5;
   }
 
   /* ---------------- STAGE 2: TRIVIA QUIZ ---------------- */
@@ -798,210 +760,55 @@
     display: none;
     flex-direction: column;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     animation: pop-in 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  .love-success-photo {
+    width: 105px;
+    height: 105px;
+    border-radius: 18px;
+    border: 3px solid var(--gold);
+    box-shadow: 0 8px 24px rgba(255, 101, 132, 0.4), 0 0 15px var(--gold-glow);
+    overflow: hidden;
+    margin: 2px 0;
+  }
+  .love-success-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
   }
   @keyframes pop-in {
     from { opacity: 0; transform: scale(0.7); }
     to { opacity: 1; transform: scale(1); }
   }
 
-  /* ---------------- STAGE 4: CRACKERS & BALLOON POP CARNIVAL ---------------- */
-  .carnival-arena {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 14px;
-  }
-  .section-micro-title {
-    font-size: 0.8rem;
-    font-weight: 700;
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-    color: var(--gold);
-    margin-bottom: 6px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-  /* Crackers Section */
-  .crackers-section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .crackers-row {
-    display: flex;
-    gap: 14px;
-    justify-content: center;
-    flex-wrap: wrap;
-    width: 100%;
-  }
-  .party-cracker {
-    position: relative;
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    padding: 6px 4px;
-  }
-  .party-cracker:hover {
-    transform: scale(1.08) rotate(-1deg);
-  }
-  .cracker-pull-left, .cracker-pull-right {
-    width: 26px;
-    height: 20px;
-    background: linear-gradient(135deg, #ffd700, #ff8c00);
-    clip-path: polygon(0 0, 100% 30%, 100% 70%, 0 100%);
-    box-shadow: 0 2px 6px rgba(0,0,0,0.3);
-    transition: transform 0.3s ease;
-  }
-  .cracker-pull-right {
-    transform: scaleX(-1);
-  }
-  .cracker-barrel {
-    background: linear-gradient(135deg, #e91e63, #9c27b0);
-    padding: 10px 18px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    border: 1px solid rgba(255, 255, 255, 0.35);
-    box-shadow: 0 6px 18px rgba(0,0,0,0.4);
-    min-width: 145px;
-    justify-content: center;
-  }
-  .party-cracker[data-type="gold"] .cracker-barrel {
-    background: linear-gradient(135deg, #f39c12, #d35400);
-  }
-  .party-cracker[data-type="rainbow"] .cracker-barrel {
-    background: linear-gradient(135deg, #0984e3, #00b894);
-  }
-  .party-cracker[data-type="love"] .cracker-barrel {
-    background: linear-gradient(135deg, #d63031, #e84393);
-  }
-  .cracker-emoji {
-    font-size: 1.2rem;
-  }
-  .cracker-label {
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: white;
-    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
-  }
-  .party-cracker.pulled {
-    animation: cracker-explode 0.6s forwards ease-out;
-  }
-  @keyframes cracker-explode {
-    0% { transform: scale(1); }
-    30% { transform: scale(1.3) rotate(4deg); }
-    60% { transform: scale(0.9) rotate(-3deg); opacity: 0.9; }
-    100% { transform: scale(1); opacity: 0.7; }
-  }
-  /* Balloons Floating Section */
-  .balloons-section {
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  .balloons-chamber {
-    position: relative;
-    width: 100%;
-    max-width: 620px;
-    height: 190px;
-    background: radial-gradient(ellipse at center, rgba(46, 20, 75, 0.4) 0%, rgba(15, 8, 28, 0.65) 100%);
-    border: 1px dashed rgba(245, 207, 115, 0.35);
-    border-radius: 20px;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    padding: 10px 14px;
-  }
-  .chamber-balloon {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    animation: balloon-wobble 3.5s infinite ease-in-out alternate;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-  }
-  .chamber-balloon:hover {
-    transform: scale(1.15) !important;
-  }
-  .balloon-orb {
-    width: 50px;
-    height: 60px;
-    border-radius: 50% 50% 50% 50% / 40% 40% 60% 60%;
-    position: relative;
-    box-shadow: inset -5px -8px 14px rgba(0,0,0,0.4), inset 5px 8px 12px rgba(255,255,255,0.45), 0 10px 22px rgba(0,0,0,0.5);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.25rem;
-  }
-  .balloon-orb::after {
-    content: '';
-    position: absolute;
-    top: 7px;
-    left: 9px;
-    width: 11px;
-    height: 16px;
-    background: rgba(255, 255, 255, 0.65);
+  /* Ambient Floating Memory Photo Bubbles */
+  .bg-photo-bubble {
+    position: fixed;
+    width: 82px;
+    height: 82px;
     border-radius: 50%;
-    transform: rotate(-35deg);
-  }
-  .balloon-knot {
-    width: 7px;
-    height: 5px;
-    border-radius: 2px;
-    margin-top: -1px;
-  }
-  .balloon-thread {
-    width: 1.5px;
-    height: 38px;
-    background: rgba(255, 255, 255, 0.45);
-  }
-  @keyframes balloon-wobble {
-    0% { transform: translateY(0px) rotate(-3deg); }
-    100% { transform: translateY(-16px) rotate(4deg); }
-  }
-  .chamber-balloon.popped {
-    animation: balloon-burst 0.3s forwards ease-out;
+    border: 2px solid rgba(245, 207, 115, 0.45);
+    box-shadow: 0 0 24px rgba(245, 207, 115, 0.28), 0 8px 20px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
     pointer-events: none;
+    z-index: 0;
+    opacity: 0.65;
+    animation: bubble-float 6.5s infinite ease-in-out alternate;
   }
-  @keyframes balloon-burst {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.6); opacity: 0.8; }
-    100% { transform: scale(0); opacity: 0; }
+  .bg-photo-bubble img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: saturate(1.1) brightness(0.95);
   }
-  /* Carnival Revealed Note Banner */
-  .carnival-note {
-    background: rgba(255, 255, 255, 0.08);
-    border: 1px solid var(--gold);
-    border-radius: 14px;
-    padding: 10px 18px;
-    font-size: 0.92rem;
-    color: var(--cream);
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    max-width: 540px;
-    text-align: left;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
-    transition: all 0.3s ease;
-  }
-  .carnival-actions {
-    display: flex;
-    gap: 10px;
-    justify-content: center;
+  @keyframes bubble-float {
+    0% { transform: translateY(0) scale(1) rotate(0deg); }
+    100% { transform: translateY(-26px) scale(1.08) rotate(6deg); }
   }
 
-  /* ---------------- STAGE 5: SCRATCH CARD (ENLARGED & DELUXE) ---------------- */
+  /* ---------------- STAGE 4: SCRATCH CARD (ENLARGED & DELUXE) ---------------- */
   .scratch-container {
     position: relative;
     width: min(440px, 88vw);
@@ -1127,14 +934,12 @@
     object-fit: cover;
     display: block;
   }
-    font-size: 2.8rem;
-    animation: float-slow 2.4s infinite ease-in-out alternate;
-  }
   .grand-title {
     font-family: 'Cinzel Decorative', 'Fraunces', serif;
     font-size: clamp(1.8rem, 6vw, 3.2rem);
     line-height: 1.1;
     background: linear-gradient(135deg, #fff7d6 20%, #f5cf73 60%, #ff8264);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 4px 15px rgba(245, 207, 115, 0.4));
@@ -1218,19 +1023,43 @@
     transform: translateX(-50%) translateY(0);
   }
 
-  /* Festive Bunting Banner across top */
+  /* Festive Bunting Banner across top - Connected String & Balloons */
   #festive-bunting {
     position: absolute;
-    top: 50px;
+    top: 46px;
     left: 0;
+    width: 100%;
+    pointer-events: none;
+    z-index: 8;
+    overflow: visible;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 0 16px;
+  }
+  .bunting-cord {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 38px;
+    pointer-events: none;
+    z-index: 1;
+  }
+  .bunting-flags-row {
+    position: relative;
     width: 100%;
     display: flex;
     justify-content: space-around;
-    pointer-events: none;
-    z-index: 8;
-    overflow: hidden;
-    padding: 0 16px;
-    opacity: 0.85;
+    padding: 6px 36px 0;
+    z-index: 2;
+  }
+  .bunting-balloon-cluster {
+    font-size: 1.35rem;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,0.4));
+    animation: float-slow 2.4s infinite ease-in-out alternate;
+    z-index: 9;
+    user-select: none;
   }
   .bunting-flag {
     width: 18px;
@@ -1318,11 +1147,26 @@
 </head>
 <body>
 
+<audio id="birthday-song" src="birthday audio.mp3" loop preload="auto"></audio>
 <canvas id="bg-canvas"></canvas>
 <canvas id="fireworks-canvas"></canvas>
 <canvas id="sparkler-trail-canvas"></canvas>
 <div id="transition-celebration-layer"></div>
 <div id="toast"><span id="toast-icon">✨</span><span id="toast-text">Ready!</span></div>
+
+<!-- Ambient Floating Memory Photo Bubbles -->
+<div class="bg-photo-bubble" style="top: 8%; left: 3%; animation-duration: 7s;">
+  <img src="https://res.cloudinary.com/kalichatbot/image/upload/v1789407294/WhatsApp_Image_2026-09-14_at_10.55.16_PM_1_fjma8x.jpg" alt="Memory Bubble 1">
+</div>
+<div class="bg-photo-bubble" style="top: 13%; right: 4%; animation-duration: 8.5s; animation-delay: 1.2s;">
+  <img src="https://res.cloudinary.com/kalichatbot/image/upload/v1789407295/WhatsApp_Image_2026-09-14_at_10.55.17_PM_2_jdfo9b.jpg" alt="Memory Bubble 2">
+</div>
+<div class="bg-photo-bubble" style="bottom: 11%; left: 4%; animation-duration: 9s; animation-delay: 0.6s;">
+  <img src="https://res.cloudinary.com/kalichatbot/image/upload/v1789407294/WhatsApp_Image_2026-09-14_at_10.55.16_PM_cqgmfu.jpg" alt="Memory Bubble 3">
+</div>
+<div class="bg-photo-bubble" style="bottom: 15%; right: 4%; animation-duration: 7.8s; animation-delay: 2s;">
+  <img src="https://res.cloudinary.com/kalichatbot/image/upload/v1789407293/WhatsApp_Image_2026-09-14_at_10.55.20_PM_alu7uk.jpg" alt="Memory Bubble 4">
+</div>
 
 <div id="app">
   <!-- Top Bar -->
@@ -1330,21 +1174,28 @@
     <div class="step-counter" id="stage-badge">Act I · Mystery</div>
     <div class="audio-controls">
       <button class="icon-btn" id="sfx-toggle" title="Sound Effects" aria-label="Toggle SFX">🔊</button>
-      <button class="icon-btn" id="music-toggle" title="Play Melody" aria-label="Toggle Music">🎵</button>
+      <button class="icon-btn" id="music-toggle" title="Play Song" aria-label="Toggle Music">🎵</button>
     </div>
   </header>
 
-  <!-- Festive Pennant Bunting -->
+  <!-- Festive Pennant Bunting - Connected String & Balloons -->
   <div id="festive-bunting">
-    <div class="bunting-flag" style="background:#ff7675; animation-delay:0s;"></div>
-    <div class="bunting-flag" style="background:#ffeaa7; animation-delay:0.2s;"></div>
-    <div class="bunting-flag" style="background:#74b9ff; animation-delay:0.4s;"></div>
-    <div class="bunting-flag" style="background:#a29bfe; animation-delay:0.1s;"></div>
-    <div class="bunting-flag" style="background:#fd79a8; animation-delay:0.3s;"></div>
-    <div class="bunting-flag" style="background:#55efc4; animation-delay:0.5s;"></div>
-    <div class="bunting-flag" style="background:#ffeaa7; animation-delay:0.15s;"></div>
-    <div class="bunting-flag" style="background:#ff7675; animation-delay:0.35s;"></div>
-    <div class="bunting-flag" style="background:#00cec9; animation-delay:0.25s;"></div>
+    <div class="bunting-balloon-cluster bunting-balloon-left">🎈🎈</div>
+    <svg class="bunting-cord" viewBox="0 0 1000 40" preserveAspectRatio="none">
+      <path d="M 10 8 Q 250 30 500 15 Q 750 30 990 8" fill="none" stroke="rgba(245, 207, 115, 0.75)" stroke-width="2.5" stroke-dasharray="6,4" />
+    </svg>
+    <div class="bunting-flags-row">
+      <div class="bunting-flag" style="background:#ff7675; animation-delay:0s;"></div>
+      <div class="bunting-flag" style="background:#ffeaa7; animation-delay:0.2s;"></div>
+      <div class="bunting-flag" style="background:#74b9ff; animation-delay:0.4s;"></div>
+      <div class="bunting-flag" style="background:#a29bfe; animation-delay:0.1s;"></div>
+      <div class="bunting-flag" style="background:#fd79a8; animation-delay:0.3s;"></div>
+      <div class="bunting-flag" style="background:#55efc4; animation-delay:0.5s;"></div>
+      <div class="bunting-flag" style="background:#ffeaa7; animation-delay:0.15s;"></div>
+      <div class="bunting-flag" style="background:#ff7675; animation-delay:0.35s;"></div>
+      <div class="bunting-flag" style="background:#00cec9; animation-delay:0.25s;"></div>
+    </div>
+    <div class="bunting-balloon-cluster bunting-balloon-right">🎈🎈</div>
   </div>
 
   <!-- Progress Indicators -->
@@ -1381,13 +1232,13 @@
       <div class="glass-card">
         <span class="kicker">STAGE 01 · CELEBRATION BAKERY</span>
         <h2 class="screen-title">The Grand Birthday Cake 🎂</h2>
-        <p class="screen-subtitle">Decorate your cake, ignite sparkling fountains, and blow out the candles to make a wish!</p>
+        <p class="screen-subtitle">Ignite sparkling fountains and tap the candles to make a wish!</p>
         
         <div class="cake-studio">
           <!-- Cake Display Area -->
           <div class="cake-stage" id="cake-stage">
-            <div class="sparkler sparkler-left" id="sparkler-l"><div class="spark-core"></div></div>
-            <div class="sparkler sparkler-right" id="sparkler-r"><div class="spark-core"></div></div>
+            <div class="sparkler sparkler-left ignited" id="sparkler-l"><div class="spark-core"></div></div>
+            <div class="sparkler sparkler-right ignited" id="sparkler-r"><div class="spark-core"></div></div>
 
             <!-- Candle Rack -->
             <div class="candles-rack" id="candles-rack">
@@ -1409,27 +1260,16 @@
             </div>
 
             <!-- Cake Multi-tier Body -->
-            <div class="cake-body" id="cake-body">
+            <div class="cake-body" id="cake-body" title="Tap cake to blow out candles!">
               <!-- Top Tier -->
               <div class="cake-tier tier-top">
                 <div class="tier-frosting"></div>
                 <div class="tier-drips"></div>
-                <div class="tier-toppings" id="tier-top-toppings">
-                  <span class="topping-item">🍓</span>
-                  <span class="topping-item">🍒</span>
-                  <span class="topping-item">🍓</span>
-                </div>
               </div>
               <!-- Bottom Tier -->
               <div class="cake-tier tier-bottom">
                 <div class="tier-frosting"></div>
                 <div class="tier-drips"></div>
-                <div class="tier-toppings" id="tier-bottom-toppings">
-                  <span class="topping-item">🍫</span>
-                  <span class="topping-item">✨</span>
-                  <span class="topping-item">🍫</span>
-                  <span class="topping-item">✨</span>
-                </div>
               </div>
               <!-- Golden Platter Stand -->
               <div class="cake-platter"></div>
@@ -1442,19 +1282,15 @@
             </div>
           </div>
 
-          <!-- Interactive Decorating Toolbar -->
+          <!-- Interactive Toolbar -->
           <div class="cake-toolbar">
-            <button class="cake-tool-btn" id="btn-add-strawberries" title="Add fresh strawberries">🍓 Berries</button>
-            <button class="cake-tool-btn" id="btn-add-sprinkles" title="Shower golden sprinkles">✨ Sprinkles</button>
-            <button class="cake-tool-btn" id="btn-add-macarons" title="Add sweet macarons">🍬 Macarons</button>
-            <button class="cake-tool-btn" id="btn-toggle-sparklers" title="Ignite golden sparklers">🪄 Sparklers</button>
-            <button class="cake-tool-btn" id="btn-toggle-candles" title="Light or extinguish candles">🕯️ Relight</button>
+            <button class="cake-tool-btn active" id="btn-toggle-sparklers" title="Toggle golden sparklers">🪄 Sparklers</button>
+            <button class="cake-tool-btn" id="btn-toggle-candles" title="Relight candles">🕯️ Relight Candles</button>
           </div>
 
-          <!-- Primary Actions -->
-          <div class="cake-primary-actions">
-            <button class="nav-btn primary" id="blow-candles-btn">Make a Wish & Blow Candles 🌬️</button>
-            <button class="nav-btn" id="cut-cake-btn">Cut a Slice 🍰</button>
+          <!-- Hint Badge -->
+          <div class="cake-hint-badge" id="cake-blow-hint">
+            <span>🌬️</span> Tap the cake or candles to make a wish & blow them out! <span>✨</span>
           </div>
         </div>
       </div>
@@ -1490,78 +1326,20 @@
           <div class="dodge-chatter" id="dodge-chatter"></div>
           
           <div class="love-success-card" id="love-success">
-            <div style="font-size:3.5rem;">💖🥰🎉</div>
-            <h3 style="font-family:'Fraunces',serif; color:var(--gold); font-size:1.4rem;">I Knew It!</h3>
-            <p style="font-size:0.92rem; color:var(--cream); max-width:320px;">You are officially locked in forever with no refunds allowed! 💕</p>
+            <div class="love-success-photo">
+              <img src="https://res.cloudinary.com/kalichatbot/image/upload/v1789407307/WhatsApp_Image_2026-09-14_at_10.55.18_PM_w5qpds.jpg" alt="Us Together">
+            </div>
+            <h3 style="font-family:'Fraunces',serif; color:var(--gold); font-size:1.35rem; margin:2px 0;">I Knew It! Forever & Always 💕</h3>
+            <p style="font-size:0.9rem; color:var(--cream); max-width:320px; margin:0;">You are officially locked in forever with no refunds allowed! 🥰</p>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- STAGE 4: CELEBRATION CRACKERS & BALLOON POP CARNIVAL -->
+    <!-- STAGE 4: GOLDEN SCRATCH CARD -->
     <section class="screen" data-stage="4">
       <div class="glass-card">
-        <span class="kicker">STAGE 04 · PARTY CARNIVAL</span>
-        <h2 class="screen-title">Crackers & Balloon Pop Fiesta 🎈💥</h2>
-        <p class="screen-subtitle">Pull the party crackers for explosive confetti & tap the floating balloons to reveal secret love notes!</p>
-        
-        <div class="carnival-arena">
-          <!-- Crackers Row -->
-          <div class="crackers-section">
-            <div class="section-micro-title">🧨 Pull The Party Crackers</div>
-            <div class="crackers-row">
-              <div class="party-cracker" id="cracker-1" data-type="gold" title="Pull me!">
-                <div class="cracker-pull-left"></div>
-                <div class="cracker-barrel">
-                  <span class="cracker-emoji">✨</span>
-                  <span class="cracker-label">Golden Burst</span>
-                </div>
-                <div class="cracker-pull-right"></div>
-              </div>
-              <div class="party-cracker" id="cracker-2" data-type="rainbow" title="Pull me!">
-                <div class="cracker-pull-left"></div>
-                <div class="cracker-barrel">
-                  <span class="cracker-emoji">🌈</span>
-                  <span class="cracker-label">Confetti Bomb</span>
-                </div>
-                <div class="cracker-pull-right"></div>
-              </div>
-              <div class="party-cracker" id="cracker-3" data-type="love" title="Pull me!">
-                <div class="cracker-pull-left"></div>
-                <div class="cracker-barrel">
-                  <span class="cracker-emoji">💖</span>
-                  <span class="cracker-label">Heart Blast</span>
-                </div>
-                <div class="cracker-pull-right"></div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Balloons Chamber -->
-          <div class="balloons-section">
-            <div class="section-micro-title">🎈 Tap To Pop The Balloons (<span id="balloons-popped-count">0</span> / 6 Popped)</div>
-            <div class="balloons-chamber" id="balloons-chamber">
-              <!-- Dynamically populated in JS -->
-            </div>
-          </div>
-
-          <!-- Revealed Note -->
-          <div class="carnival-note" id="carnival-note">
-            <span style="font-size:1.4rem;">💌</span>
-            <span id="carnival-note-text">Pop any balloon or pull a cracker to unlock sweet celebrations!</span>
-          </div>
-
-          <div class="carnival-actions">
-            <button class="nav-btn primary" id="carnival-frenzy-btn">🎉 Pop All Balloons & Fire Crackers!</button>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- STAGE 5: GOLDEN SCRATCH CARD -->
-    <section class="screen" data-stage="5">
-      <div class="glass-card">
-        <span class="kicker">STAGE 05 · SECRET PROMISE</span>
+        <span class="kicker">STAGE 04 · SECRET PROMISE</span>
         <h2 class="screen-title">Scratch To Reveal</h2>
         <p class="screen-subtitle">Use your finger or mouse to scratch off the golden seal.</p>
         
@@ -1578,10 +1356,10 @@
       </div>
     </section>
 
-    <!-- STAGE 6: POLAROID MEMORY CAROUSEL -->
-    <section class="screen" data-stage="6">
+    <!-- STAGE 5: POLAROID MEMORY CAROUSEL -->
+    <section class="screen" data-stage="5">
       <div class="glass-card">
-        <span class="kicker">STAGE 06 · CHERISHED MEMORIES</span>
+        <span class="kicker">STAGE 05 · CHERISHED MEMORIES</span>
         <h2 class="screen-title">Chapters of Us 📸</h2>
         <p class="screen-subtitle">A collection of moments that make life with you so magical.</p>
         
@@ -1591,14 +1369,14 @@
 
         <div class="carousel-arrows">
           <button class="icon-btn" id="pol-prev" aria-label="Previous Photo">‹</button>
-          <span style="font-size:0.85rem; color:var(--gold); font-weight:600;" id="pol-counter">1 / 4</span>
+          <span style="font-size:0.85rem; color:var(--gold); font-weight:600;" id="pol-counter">1 / 15</span>
           <button class="icon-btn" id="pol-next" aria-label="Next Photo">›</button>
         </div>
       </div>
     </section>
 
-    <!-- STAGE 7: THE GRAND FINALE (HAPPY BIRTHDAY ON THE LAST PAGE) -->
-    <section class="screen" data-stage="7">
+    <!-- STAGE 6: THE GRAND FINALE (HAPPY BIRTHDAY ON THE LAST PAGE) -->
+    <section class="screen" data-stage="6">
       <div class="glass-card" style="border-color:rgba(245, 207, 115, 0.45); box-shadow:0 0 50px rgba(245, 207, 115, 0.25);">
         <div class="finale-crown">👑✨</div>
         <div class="finale-portrait-frame">
@@ -1614,10 +1392,6 @@
           </p>
         </div>
 
-        <div class="action-pills">
-          <button class="pill-action-btn" id="fireworks-btn">Launch Fireworks 🎆</button>
-          <button class="pill-action-btn" id="celebrate-again-btn">Celebrate Again 🎉</button>
-        </div>
       </div>
     </section>
 
@@ -1687,22 +1461,66 @@ const CONFIG = {
       caption: "My favorite human forever 💫",
       emoji: "💫"
     },
-    { image: "", caption: "Adventures together 🚗", emoji: "🚗" },
-    { image: "", caption: "Late night laughs 🌙", emoji: "🌙" },
-    { image: "", caption: "Sweet little memories 🍰", emoji: "🍰" },
-    { image: "", caption: "Hand in hand 🤝", emoji: "🤝" },
-    { image: "", caption: "Our secret inside jokes 😂", emoji: "😂" },
-    { image: "", caption: "Sunsets with you 🌅", emoji: "🌅" },
-    { image: "", caption: "Candid smiles 📸", emoji: "📸" },
-    { image: "", caption: "Forever & Always ♾️", emoji: "♾️" },
-    { image: "", caption: "My safe haven 🏡", emoji: "🏡" },
-    { image: "", caption: "Wild dreams taking flight ✈️", emoji: "✈️" },
-    { image: "", caption: "Better together ☕", emoji: "☕" },
-    { image: "", caption: "Dancing through life 💃", emoji: "💃" },
+    {
+      image: "https://res.cloudinary.com/kalichatbot/image/upload/v1789407294/WhatsApp_Image_2026-09-14_at_10.55.16_PM_1_fjma8x.jpg",
+      caption: "Pure happiness with you ☀️",
+      emoji: "☀️"
+    },
+    {
+      image: "https://res.cloudinary.com/kalichatbot/image/upload/v1789407295/WhatsApp_Image_2026-09-14_at_10.55.17_PM_2_jdfo9b.jpg",
+      caption: "Adventures & roadtrips together 🚗",
+      emoji: "🚗"
+    },
+    {
+      image: "https://res.cloudinary.com/kalichatbot/image/upload/v1789407294/WhatsApp_Image_2026-09-14_at_10.55.16_PM_cqgmfu.jpg",
+      caption: "Sweet memories we cherish 🍰",
+      emoji: "🍰"
+    },
+    {
+      image: "https://res.cloudinary.com/kalichatbot/image/upload/v1789407293/WhatsApp_Image_2026-09-14_at_10.55.20_PM_alu7uk.jpg",
+      caption: "Late night laughs & talks 🌙",
+      emoji: "🌙"
+    },
+    {
+      image: "https://res.cloudinary.com/kalichatbot/image/upload/v1789407293/WhatsApp_Image_2026-09-14_at_10.55.20_PM_1_mj2ul1.jpg",
+      caption: "Our silly inside jokes 😂",
+      emoji: "😂"
+    },
+    {
+      image: "https://res.cloudinary.com/kalichatbot/image/upload/v1789407293/WhatsApp_Image_2026-09-14_at_10.55.13_PM_1_psezvm.jpg",
+      caption: "Hand in hand always 🤝",
+      emoji: "🤝"
+    },
+    {
+      image: "https://res.cloudinary.com/kalichatbot/image/upload/v1789407293/WhatsApp_Image_2026-09-14_at_10.55.22_PM_m1kj38.jpg",
+      caption: "Golden hours with you 🌅",
+      emoji: "🌅"
+    },
+    {
+      image: "https://res.cloudinary.com/kalichatbot/image/upload/v1789407293/WhatsApp_Image_2026-09-14_at_10.55.21_PM_lsb8w1.jpg",
+      caption: "Candid smiles & pure bliss 📸",
+      emoji: "📸"
+    },
+    {
+      image: "https://res.cloudinary.com/kalichatbot/image/upload/v1789407292/WhatsApp_Image_2026-09-14_at_10.55.22_PM_1_izrdc8.jpg",
+      caption: "My safest haven & home 🏡",
+      emoji: "🏡"
+    },
+    {
+      image: "https://res.cloudinary.com/kalichatbot/image/upload/v1789407292/WhatsApp_Image_2026-09-14_at_10.55.21_PM_1_wiviyj.jpg",
+      caption: "Wild dreams taking flight ✈️",
+      emoji: "✈️"
+    },
+    {
+      image: "https://res.cloudinary.com/kalichatbot/image/upload/v1789407291/WhatsApp_Image_2026-09-14_at_10.55.21_PM_2_jrynjk.jpg",
+      caption: "Forever & Always ♾️",
+      emoji: "♾️"
+    },
+    { image: "", caption: "Better together always ☕", emoji: "☕" },
+    { image: "", caption: "Dancing through life with you 💃", emoji: "💃" },
     { image: "", caption: "You make everything magical 🪄", emoji: "🪄" },
     { image: "", caption: "To infinity and beyond 🚀", emoji: "🚀" },
-    { image: "", caption: "My greatest blessing 🌟", emoji: "🌟" },
-    { image: "", caption: "Happy Birthday, My Love! 👑", emoji: "👑" }
+    { image: "", caption: "Happy Birthday, My Heart! 👑", emoji: "👑" }
   ]
 };
 
@@ -1901,12 +1719,54 @@ class SoundEngine {
 }
 const sounds = new SoundEngine();
 
+const birthdaySong = document.getElementById('birthday-song');
+let isSongPlaying = false;
+
+function startBirthdaySong() {
+  if (!birthdaySong) return;
+  if (birthdaySong.paused) {
+    birthdaySong.play().then(() => {
+      isSongPlaying = true;
+      const btn = document.getElementById('music-toggle');
+      if (btn) {
+        btn.classList.add('playing');
+        btn.textContent = '🎶';
+      }
+    }).catch(err => {
+      console.log('Audio autoplay waiting for user gesture:', err);
+    });
+  }
+}
+
+function toggleBirthdaySong() {
+  if (!birthdaySong) return;
+  const btn = document.getElementById('music-toggle');
+  if (birthdaySong.paused) {
+    birthdaySong.play().then(() => {
+      isSongPlaying = true;
+      if (btn) {
+        btn.classList.add('playing');
+        btn.textContent = '🎶';
+      }
+      showToast('Playing Birthday Melody 🎶');
+    }).catch(err => {});
+  } else {
+    birthdaySong.pause();
+    isSongPlaying = false;
+    if (btn) {
+      btn.classList.remove('playing');
+      btn.textContent = '🎵';
+    }
+    showToast('Melody Paused 🔇');
+  }
+}
+
 document.getElementById('sfx-toggle').addEventListener('click', () => {
   sounds.sfxEnabled = !sounds.sfxEnabled;
   document.getElementById('sfx-toggle').textContent = sounds.sfxEnabled ? '🔊' : '🔇';
   showToast(sounds.sfxEnabled ? 'SFX Enabled' : 'SFX Muted');
 });
-document.getElementById('music-toggle').addEventListener('click', () => sounds.toggleMusic());
+document.getElementById('music-toggle').addEventListener('click', () => toggleBirthdaySong());
 
 function showToast(msg, icon = '✨') {
   const toast = document.getElementById('toast');
@@ -1970,15 +1830,14 @@ function showToast(msg, icon = '✨') {
 /* =========================================================================
    STAGE NAVIGATION (Zero Page Scroll, Fluid App-Style Transitions)
    ========================================================================= */
-const TOTAL_STAGES = 8;
+const TOTAL_STAGES = 7;
 const stageTitles = [
   "Act I · The Mystery",
   "Act II · Cake Studio 🎂",
   "Act III · The Us Quiz 💖",
   "Act IV · Runaway Question 🤭",
-  "Act V · Carnival Fiesta 🎈💥",
-  "Act VI · Secret Promise 🎟️",
-  "Act VII · Memories 📸",
+  "Act V · Secret Promise 🎟️",
+  "Act VI · Memories 📸",
   "Grand Finale · Celebration 👑🎆"
 ];
 
@@ -2073,8 +1932,7 @@ function updateUI() {
   }
 
   // Trigger stage specific initializations
-  if (currentStage === 4) initCarnivalStage();
-  if (currentStage === 5) initScratchCard();
+  if (currentStage === 4) initScratchCard();
 }
 
 function goToStage(idx) {
@@ -2093,6 +1951,7 @@ prevBtn.addEventListener('click', () => {
 });
 
 nextBtn.addEventListener('click', () => {
+  startBirthdaySong();
   if (currentStage === TOTAL_STAGES - 1) {
     goToStage(0);
   } else {
@@ -2111,6 +1970,7 @@ const vaultBox = document.getElementById('vault-box');
 let vaultOpened = false;
 
 vaultBox.addEventListener('click', () => {
+  startBirthdaySong();
   if (vaultOpened) {
     goToStage(1);
     return;
@@ -2136,108 +1996,53 @@ vaultBox.addEventListener('click', () => {
 const candleItems = document.querySelectorAll('.candle-item');
 const sparklerL = document.getElementById('sparkler-l');
 const sparklerR = document.getElementById('sparkler-r');
-const topToppings = document.getElementById('tier-top-toppings');
-const bottomToppings = document.getElementById('tier-bottom-toppings');
 const cakeBody = document.getElementById('cake-body');
 const cakeWishBanner = document.getElementById('cake-wish-banner');
 const cakeWishMsg = document.getElementById('cake-wish-msg');
 
-let sparklersIgnited = false;
+let sparklersIgnited = true;
 let sparklerInterval = null;
-let cakeDecorationsCount = 0;
 
-// Individual candle click toggles flame
-candleItems.forEach(c => {
-  c.addEventListener('click', () => {
-    c.classList.toggle('extinguished');
-    sounds.pop();
-    if (!c.classList.contains('extinguished')) {
-      sounds.chime();
+function igniteSparklers() {
+  sparklersIgnited = true;
+  const btn = document.getElementById('btn-toggle-sparklers');
+  if (btn) btn.classList.add('active');
+  if (sparklerL) sparklerL.classList.add('ignited');
+  if (sparklerR) sparklerR.classList.add('ignited');
+  clearInterval(sparklerInterval);
+  sparklerInterval = setInterval(() => {
+    if (!sparklersIgnited) return;
+    if (Math.random() < 0.25) sounds.sparklerCrackle();
+    if (window.confetti && Math.random() < 0.3) {
+      confetti({
+        particleCount: 5,
+        angle: 75,
+        spread: 25,
+        origin: { x: 0.38, y: 0.6 },
+        colors: ['#ffeaa7', '#ffd700', '#fff']
+      });
+      confetti({
+        particleCount: 5,
+        angle: 105,
+        spread: 25,
+        origin: { x: 0.62, y: 0.6 },
+        colors: ['#ffeaa7', '#ffd700', '#fff']
+      });
     }
-  });
-});
+  }, 300);
+}
 
-// Topping: Strawberries & Berries
-document.getElementById('btn-add-strawberries').addEventListener('click', () => {
-  sounds.pop();
-  cakeDecorationsCount++;
-  const berries = ['🍓', '🍒', '🫐', '🍓'];
-  const b = berries[Math.floor(Math.random() * berries.length)];
-  const span = document.createElement('span');
-  span.className = 'topping-item';
-  span.textContent = b;
-  span.style.animation = 'pop-in 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-  if (cakeDecorationsCount % 2 === 0) {
-    topToppings.appendChild(span);
-  } else {
-    bottomToppings.appendChild(span);
-  }
-  showToast("Added Fresh Berries! 🍓");
-});
-
-// Topping: Sprinkles
-document.getElementById('btn-add-sprinkles').addEventListener('click', () => {
-  sounds.chime();
-  if (window.confetti) {
-    confetti({
-      particleCount: 30,
-      spread: 45,
-      origin: { y: 0.55 },
-      colors: ['#ffd700', '#ff6b81', '#70a1ff', '#2ed573']
-    });
-  }
-  const sprinkles = ['✨', '⭐', '🌟', '💛'];
-  const s = sprinkles[Math.floor(Math.random() * sprinkles.length)];
-  const span = document.createElement('span');
-  span.className = 'topping-item';
-  span.textContent = s;
-  bottomToppings.appendChild(span);
-  showToast("Golden Sprinkles Showered! ✨");
-});
-
-// Topping: Macarons
-document.getElementById('btn-add-macarons').addEventListener('click', () => {
-  sounds.pop();
-  const macarons = ['🍬', '🧁', '🍪'];
-  const m = macarons[Math.floor(Math.random() * macarons.length)];
-  const span = document.createElement('span');
-  span.className = 'topping-item';
-  span.textContent = m;
-  topToppings.appendChild(span);
-  showToast("Sweet Macarons Added! 🍬");
-});
+// Sparklers ON by default
+igniteSparklers();
 
 // Toggle Sparklers
 document.getElementById('btn-toggle-sparklers').addEventListener('click', () => {
   sparklersIgnited = !sparklersIgnited;
   const btn = document.getElementById('btn-toggle-sparklers');
   if (sparklersIgnited) {
-    btn.classList.add('active');
-    sparklerL.classList.add('ignited');
-    sparklerR.classList.add('ignited');
+    igniteSparklers();
     sounds.successFanfare();
-    showToast("Dual Sparklers Ignited! 🪄✨");
-    clearInterval(sparklerInterval);
-    sparklerInterval = setInterval(() => {
-      if (!sparklersIgnited) return;
-      sounds.sparklerCrackle();
-      if (window.confetti && Math.random() < 0.35) {
-        confetti({
-          particleCount: 5,
-          angle: 75,
-          spread: 25,
-          origin: { x: 0.38, y: 0.6 },
-          colors: ['#ffeaa7', '#ffd700', '#fff']
-        });
-        confetti({
-          particleCount: 5,
-          angle: 105,
-          spread: 25,
-          origin: { x: 0.62, y: 0.6 },
-          colors: ['#ffeaa7', '#ffd700', '#fff']
-        });
-      }
-    }, 280);
+    showToast("Dual Sparklers Sizzling! 🪄✨");
   } else {
     btn.classList.remove('active');
     sparklerL.classList.remove('ignited');
@@ -2247,18 +2052,8 @@ document.getElementById('btn-toggle-sparklers').addEventListener('click', () => 
   }
 });
 
-// Toggle / Relight Candles
-document.getElementById('btn-toggle-candles').addEventListener('click', () => {
-  candleItems.forEach(c => {
-    c.classList.remove('extinguished', 'blowing');
-  });
-  cakeWishBanner.classList.remove('show');
-  sounds.chime();
-  showToast("All Candles Relit! 🕯️");
-});
-
-// Blow Out Candles & Make a Wish
-document.getElementById('blow-candles-btn').addEventListener('click', () => {
+// Candle blowing & Wish logic
+function blowOutCandles() {
   sounds.candleBlow();
   candleItems.forEach(c => {
     c.classList.add('blowing');
@@ -2278,30 +2073,30 @@ document.getElementById('blow-candles-btn').addEventListener('click', () => {
         colors: ['#f5cf73', '#ff6584', '#ffffff', '#4ade80', '#cbb7f0']
       });
     }
-    cakeWishMsg.textContent = `Happy Birthday, ${CONFIG.recipientName}! May your year ahead be sweet, magnificent, and full of joy! ✨`;
+    cakeWishMsg.textContent = `Happy Birthday, ${CONFIG.recipientName}! May your year ahead be filled with laughter, boundless joy, and immense love! ✨`;
     cakeWishBanner.classList.add('show');
-    showToast("Wish made! The universe is taking notes! 🌟");
+    showToast("Wish made! The universe is listening! 🌟");
     highlightNextButton();
-  }, 600);
+  }, 550);
+}
+
+// Tapping cake or candles blows them out
+cakeBody.addEventListener('click', blowOutCandles);
+candleItems.forEach(c => {
+  c.addEventListener('click', (e) => {
+    e.stopPropagation();
+    blowOutCandles();
+  });
 });
 
-// Cut Cake
-document.getElementById('cut-cake-btn').addEventListener('click', () => {
+// Toggle / Relight Candles
+document.getElementById('btn-toggle-candles').addEventListener('click', () => {
+  candleItems.forEach(c => {
+    c.classList.remove('extinguished', 'blowing');
+  });
+  cakeWishBanner.classList.remove('show');
   sounds.chime();
-  cakeBody.style.transform = 'scale(1.05) rotate(1.5deg)';
-  setTimeout(() => cakeBody.style.transform = 'scale(1) rotate(0deg)', 350);
-
-  if (window.confetti) {
-    confetti({
-      particleCount: 60,
-      spread: 70,
-      origin: { y: 0.6 }
-    });
-  }
-  cakeWishMsg.textContent = "🍰 A sweet slice of infinite happiness reserved only for you!";
-  cakeWishBanner.classList.add('show');
-  showToast("A delicious birthday slice! 🍰");
-  highlightNextButton();
+  showToast("Candles Relit! 🕯️");
 });
 
 /* =========================================================================
@@ -2451,149 +2246,7 @@ yesBtn.addEventListener('click', () => {
 });
 
 /* =========================================================================
-   STAGE 4: CRACKERS & BALLOON POP FIESTA
-   ========================================================================= */
-let carnivalInited = false;
-let balloonsPopped = 0;
-let crackersPulled = 0;
-
-const balloonData = [
-  { emoji: "💖", color: "#ff4757", note: "Your smile is genuinely the brightest light in my world! ✨" },
-  { emoji: "🌟", color: "#ffa502", note: "May every single dream on your heart come true this year! 🚀" },
-  { emoji: "🌸", color: "#ff6b81", note: "You bring so much joy, warmth, and sweetness everywhere! 🍰" },
-  { emoji: "🎈", color: "#2ed573", note: "Cheers to laughing till our stomachs hurt for another 365 days! 😂" },
-  { emoji: "💫", color: "#1e90ff", note: "You are the rarest, most cherished human on this planet! 💎" },
-  { emoji: "👑", color: "#a55eea", note: "Forever royalty of my favorite memories! Happy Birthday! 👑" }
-];
-
-function initCarnivalStage() {
-  if (carnivalInited) return;
-  carnivalInited = true;
-  
-  const chamber = document.getElementById('balloons-chamber');
-  chamber.innerHTML = '';
-  balloonsPopped = 0;
-  document.getElementById('balloons-popped-count').textContent = '0';
-
-  balloonData.forEach((b, idx) => {
-    const bEl = document.createElement('div');
-    bEl.className = 'chamber-balloon';
-    bEl.style.animationDelay = (idx * 0.35) + 's';
-    bEl.title = 'Tap to pop!';
-    bEl.innerHTML = `
-      <div class="balloon-orb" style="background: radial-gradient(circle at 35% 35%, #fff 0%, ${b.color} 50%, #111 100%);">
-        ${b.emoji}
-      </div>
-      <div class="balloon-knot" style="background:${b.color};"></div>
-      <div class="balloon-thread"></div>
-    `;
-
-    bEl.addEventListener('click', () => {
-      if (bEl.classList.contains('popped')) return;
-      bEl.classList.add('popped');
-      sounds.balloonPop();
-      balloonsPopped++;
-      document.getElementById('balloons-popped-count').textContent = balloonsPopped;
-
-      if (window.confetti) {
-        const rect = bEl.getBoundingClientRect();
-        confetti({
-          particleCount: 30,
-          spread: 50,
-          origin: {
-            x: (rect.left + rect.width / 2) / window.innerWidth,
-            y: (rect.top + rect.height / 2) / window.innerHeight
-          },
-          colors: [b.color, '#ffffff', '#f5cf73']
-        });
-      }
-
-      document.getElementById('carnival-note-text').textContent = b.note;
-      showToast("Balloon Popped! 🎈");
-
-      if (balloonsPopped >= balloonData.length) {
-        sounds.successFanfare();
-        highlightNextButton();
-      }
-    });
-
-    chamber.appendChild(bEl);
-  });
-}
-
-// Crackers setup
-const crackerNotes = {
-  "gold": "✨ Golden Fortune: Boundless health, immense wealth, and unending happiness!",
-  "rainbow": "🌈 Rainbow Confetti: Endless exciting trips, wild adventures, and belly laughter!",
-  "love": "💖 Heart Blast: 1,000,000% love, warmest hugs, and lifelong cherished moments!"
-};
-
-document.querySelectorAll('.party-cracker').forEach(crk => {
-  crk.addEventListener('click', () => {
-    if (crk.classList.contains('pulled')) return;
-    crk.classList.add('pulled');
-    sounds.crackerBang();
-    crackersPulled++;
-
-    const type = crk.dataset.type;
-    const rect = crk.getBoundingClientRect();
-    if (window.confetti) {
-      confetti({
-        particleCount: 70,
-        spread: 80,
-        origin: {
-          x: (rect.left + rect.width / 2) / window.innerWidth,
-          y: (rect.top + rect.height / 2) / window.innerHeight
-        },
-        colors: ['#ffd700', '#ff4757', '#2ed573', '#1e90ff', '#ffffff']
-      });
-    }
-
-    document.getElementById('carnival-note-text').textContent = crackerNotes[type] || "🎉 Happy Birthday Celebration!";
-    showToast("CRACKER BANG! 💥");
-    highlightNextButton();
-  });
-});
-
-// Pop All Frenzy
-document.getElementById('carnival-frenzy-btn').addEventListener('click', () => {
-  sounds.crackerBang();
-  sounds.successFanfare();
-  
-  // Pull all crackers
-  document.querySelectorAll('.party-cracker').forEach((crk, idx) => {
-    setTimeout(() => {
-      crk.classList.add('pulled');
-      sounds.crackerBang();
-    }, idx * 120);
-  });
-
-  // Pop all balloons
-  document.querySelectorAll('.chamber-balloon').forEach((b, idx) => {
-    setTimeout(() => {
-      if (!b.classList.contains('popped')) {
-        b.classList.add('popped');
-        sounds.balloonPop();
-      }
-    }, idx * 100);
-  });
-  balloonsPopped = balloonData.length;
-  document.getElementById('balloons-popped-count').textContent = balloonsPopped;
-
-  if (window.confetti) {
-    confetti({
-      particleCount: 140,
-      spread: 100,
-      origin: { y: 0.6 }
-    });
-  }
-  document.getElementById('carnival-note-text').textContent = `💥 FRENZY CELEBRATION! All stars in the sky shine for ${CONFIG.recipientName} today! 🌟`;
-  showToast("Mega Carnival Explosion! 🎉🎈");
-  highlightNextButton();
-});
-
-/* =========================================================================
-   STAGE 5: GOLDEN SCRATCH CARD (Lag-free 60fps HTML5 Canvas)
+   STAGE 4: GOLDEN SCRATCH CARD (Lag-free 60fps HTML5 Canvas)
    ========================================================================= */
 let scratchInited = false;
 
@@ -2693,7 +2346,7 @@ function initScratchCard() {
 }
 
 /* =========================================================================
-   STAGE 6: POLAROID CAROUSEL
+   STAGE 5: POLAROID CAROUSEL
    ========================================================================= */
 const polaroidDeck = document.getElementById('polaroid-deck');
 const polCounter = document.getElementById('pol-counter');
@@ -2746,7 +2399,7 @@ document.getElementById('pol-next').addEventListener('click', () => {
 });
 
 /* =========================================================================
-   STAGE 7: THE GRAND FINALE FIREWORKS & CELEBRATION
+   STAGE 6: THE GRAND FINALE FIREWORKS & CELEBRATION
    ========================================================================= */
 function launchGrandFireworks() {
   sounds.successFanfare();
