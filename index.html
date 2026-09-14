@@ -621,9 +621,9 @@
   }
   .quiz-progress-line {
     display: flex;
-    gap: 6px;
+    gap: 1px;
     width: 100%;
-    margin-bottom: 6px;
+    /* margin-bottom: 10px; */
   }
   .q-step {
     flex: 1;
@@ -791,32 +791,69 @@
     to { opacity: 1; transform: scale(1); }
   }
 
-  /* Ambient Floating Memory Photo Bubbles (Enlarged & Deluxe) */
+  /* Ambient Floating Memory Photo Bubbles (Interactive, Enlarged & Sparkling on Hover) */
   .bg-photo-bubble {
     position: fixed;
     width: clamp(120px, 11vw, 145px);
     height: clamp(120px, 11vw, 145px);
     border-radius: 50%;
-    border: 3.5px solid rgba(245, 207, 115, 0.7);
+    border: 3.5px solid rgba(245, 207, 115, 0.75);
     box-shadow: 0 0 32px rgba(245, 207, 115, 0.4), 0 14px 30px rgba(0, 0, 0, 0.7);
     overflow: hidden;
-    pointer-events: none;
-    z-index: 1;
-    opacity: 0.9;
+    pointer-events: auto; /* Clickable & Hoverable */
+    cursor: pointer;
+    z-index: 15;
+    opacity: 0.94;
     animation: bubble-float 7s infinite ease-in-out alternate;
-    transition: transform 0.3s ease, opacity 0.3s ease;
+    transition: transform 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.35s ease, border-color 0.35s ease, filter 0.35s ease;
+  }
+  .bg-photo-bubble::before {
+    content: '';
+    position: absolute;
+    inset: -120%;
+    background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.7) 50%, transparent 60%);
+    transform: rotate(25deg);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 3;
+  }
+  .bg-photo-bubble:hover {
+    transform: scale(1.35) !important;
+    animation-play-state: paused;
+    border-color: #fff275;
+    border-width: 4px;
+    box-shadow: 
+      0 0 35px #ffd700, 
+      0 0 70px rgba(255, 215, 0, 0.9), 
+      0 0 100px rgba(255, 101, 132, 0.65), 
+      inset 0 0 25px rgba(255, 255, 255, 0.85);
+    filter: saturate(1.25) brightness(1.1);
+    z-index: 50;
+  }
+  .bg-photo-bubble:hover::before {
+    opacity: 1;
+    animation: sparkle-sweep 1.2s infinite linear;
+  }
+  @keyframes sparkle-sweep {
+    0% { transform: translateX(-60%) translateY(-60%) rotate(25deg); }
+    100% { transform: translateX(60%) translateY(60%) rotate(25deg); }
   }
   .bg-photo-bubble img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     filter: saturate(1.15) brightness(1.02);
+    transition: transform 0.35s ease;
+  }
+  .bg-photo-bubble:hover img {
+    transform: scale(1.08);
   }
   @media (max-width: 600px) {
     .bg-photo-bubble {
       width: clamp(75px, 18vw, 95px);
       height: clamp(75px, 18vw, 95px);
-      opacity: 0.75;
+      opacity: 0.85;
     }
   }
   @keyframes bubble-float {
@@ -1071,181 +1108,6 @@
     padding: 6px 36px 0;
     z-index: 2;
   }
-  /* Garland Mini Balloon Clusters */
-  .bunting-balloon-cluster {
-    position: relative;
-    width: 44px;
-    height: 48px;
-    animation: float-slow 2.8s infinite ease-in-out alternate;
-    z-index: 9;
-    user-select: none;
-  }
-  .mini-cluster-balloon {
-    position: absolute;
-    width: 20px;
-    height: 26px;
-    border-radius: 50% 50% 50% 50% / 42% 42% 58% 58%;
-    box-shadow: inset -2px -3px 5px rgba(0,0,0,0.35), inset 2px 3px 5px rgba(255,255,255,0.45), 0 4px 8px rgba(0,0,0,0.4);
-  }
-  .mini-cluster-balloon::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    width: 1px;
-    height: 10px;
-    background: rgba(255,255,255,0.6);
-  }
-  .mini-cluster-balloon.b-pink {
-    background: radial-gradient(circle at 35% 28%, #fff 0%, #ff7675 45%, #d63031 100%);
-    top: 0; left: 2px; transform: rotate(-12deg);
-  }
-  .mini-cluster-balloon.b-gold {
-    background: radial-gradient(circle at 35% 28%, #fff 0%, #f5cf73 45%, #b8860b 100%);
-    top: 3px; right: 2px; transform: rotate(14deg);
-  }
-  .mini-cluster-balloon.b-purple {
-    background: radial-gradient(circle at 35% 28%, #fff 0%, #a29bfe 45%, #574b90 100%);
-    bottom: 2px; left: 10px; transform: rotate(2deg); z-index: 2;
-  }
-  .mini-cluster-balloon.b-teal {
-    background: radial-gradient(circle at 35% 28%, #fff 0%, #81ecec 45%, #00cec9 100%);
-    top: 0; left: 2px; transform: rotate(-12deg);
-  }
-
-  /* ---------------- FESTIVE BALLOONS EVERYWHERE (Deluxe 3D Shiny) ---------------- */
-  #ambient-balloons-container {
-    position: fixed;
-    inset: 0;
-    pointer-events: none;
-    overflow: hidden;
-    z-index: 1;
-  }
-  .festive-balloon {
-    position: fixed;
-    width: var(--b-w, 50px);
-    height: var(--b-h, 64px);
-    border-radius: 50% 50% 50% 50% / 42% 42% 58% 58%;
-    cursor: pointer;
-    pointer-events: auto;
-    user-select: none;
-    box-shadow: 
-      inset -4px -6px 14px rgba(0, 0, 0, 0.35),
-      inset 4px 5px 10px rgba(255, 255, 255, 0.45),
-      0 12px 28px rgba(0, 0, 0, 0.45),
-      0 0 25px var(--b-glow, rgba(255, 118, 117, 0.35));
-    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    animation: balloon-bob var(--b-dur, 6s) infinite ease-in-out alternate;
-    will-change: transform;
-    z-index: 2;
-  }
-  .festive-balloon:hover {
-    transform: scale(1.15) rotate(5deg);
-    filter: brightness(1.12);
-  }
-  .festive-balloon.b-rose {
-    background: radial-gradient(circle at 35% 28%, #ffffff 0%, #ff6584 45%, #c4294a 100%);
-    --b-glow: rgba(255, 101, 132, 0.45);
-  }
-  .festive-balloon.b-gold {
-    background: radial-gradient(circle at 35% 28%, #ffffff 0%, #f5cf73 45%, #b8860b 100%);
-    --b-glow: rgba(245, 207, 115, 0.45);
-  }
-  .festive-balloon.b-lavender {
-    background: radial-gradient(circle at 35% 28%, #ffffff 0%, #cbb7f0 45%, #6c5ce7 100%);
-    --b-glow: rgba(162, 155, 254, 0.45);
-  }
-  .festive-balloon.b-mint {
-    background: radial-gradient(circle at 35% 28%, #ffffff 0%, #81ecec 45%, #00cec9 100%);
-    --b-glow: rgba(129, 236, 236, 0.45);
-  }
-  .festive-balloon.b-peach {
-    background: radial-gradient(circle at 35% 28%, #ffffff 0%, #fab1a0 45%, #e17055 100%);
-    --b-glow: rgba(250, 177, 160, 0.45);
-  }
-
-  /* Specular Highlight reflection */
-  .balloon-shine {
-    position: absolute;
-    top: 12%;
-    left: 18%;
-    width: 28%;
-    height: 35%;
-    border-radius: 50%;
-    background: radial-gradient(ellipse at center, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 75%);
-    transform: rotate(-35deg);
-    pointer-events: none;
-  }
-  .balloon-knot {
-    position: absolute;
-    bottom: -4px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 7px;
-    height: 5px;
-    background: inherit;
-    border-radius: 2px 2px 4px 4px;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
-    pointer-events: none;
-  }
-  .balloon-string {
-    position: absolute;
-    bottom: -50px;
-    left: 50%;
-    width: 1.5px;
-    height: 50px;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.15));
-    transform-origin: top center;
-    animation: string-sway 3.2s infinite ease-in-out alternate;
-    pointer-events: none;
-  }
-  .festive-balloon.popping, .ambient-drifter.popping {
-    animation: balloon-pop-anim 0.22s forwards ease-out !important;
-    pointer-events: none;
-  }
-  @keyframes balloon-pop-anim {
-    0% { transform: scale(1); opacity: 1; }
-    50% { transform: scale(1.35); opacity: 0.85; }
-    100% { transform: scale(0.1); opacity: 0; }
-  }
-  @keyframes balloon-bob {
-    0% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-16px) translateX(var(--b-drift, 8px)) rotate(-3deg); }
-    100% { transform: translateY(-32px) translateX(calc(var(--b-drift, 8px) * -1)) rotate(4deg); }
-  }
-  @keyframes string-sway {
-    0% { transform: rotate(-8deg); }
-    100% { transform: rotate(10deg); }
-  }
-
-  /* Floating Drifter Balloons rising lazily from bottom */
-  .ambient-drifter {
-    position: absolute;
-    bottom: -90px;
-    border-radius: 50% 50% 50% 50% / 42% 42% 58% 58%;
-    cursor: pointer;
-    pointer-events: auto;
-    animation: drift-upwards linear forwards;
-    will-change: transform;
-    z-index: 1;
-    user-select: none;
-  }
-  .ambient-drifter:hover {
-    filter: brightness(1.15);
-    transform: scale(1.1);
-  }
-  @keyframes drift-upwards {
-    0% { transform: translateY(0) rotate(0deg); opacity: 0; }
-    6% { opacity: 0.85; }
-    85% { opacity: 0.85; }
-    100% { transform: translateY(calc(-100vh - 140px)) rotate(18deg); opacity: 0; }
-  }
-  @media (max-width: 600px) {
-    .festive-balloon {
-      transform: scale(0.75);
-      transform-origin: center;
-    }
-  }
   .bunting-flag {
     width: 18px;
     height: 26px;
@@ -1353,43 +1215,6 @@
   <img src="https://res.cloudinary.com/kalichatbot/image/upload/v1789407293/WhatsApp_Image_2026-09-14_at_10.55.20_PM_alu7uk.jpg" alt="Memory Bubble 4">
 </div>
 
-<!-- Ambient Floating Balloon Field (Everywhere & Interactive) -->
-<div id="ambient-balloons-container" aria-label="Celebration Balloons">
-  <!-- Left Side Floating Balloons -->
-  <div class="festive-balloon b-rose" style="top: 24%; left: 7%; --b-w: 48px; --b-h: 62px; --b-dur: 5.5s; --b-drift: 12px;" title="Tap to pop! 🎈">
-    <div class="balloon-shine"></div>
-    <div class="balloon-knot"></div>
-    <div class="balloon-string"></div>
-  </div>
-  <div class="festive-balloon b-gold" style="top: 50%; left: 3.5%; --b-w: 55px; --b-h: 70px; --b-dur: 6.8s; animation-delay: 1.1s; --b-drift: -14px;" title="Tap to pop! 🎈">
-    <div class="balloon-shine"></div>
-    <div class="balloon-knot"></div>
-    <div class="balloon-string"></div>
-  </div>
-  <div class="festive-balloon b-lavender" style="top: 76%; left: 7.5%; --b-w: 46px; --b-h: 58px; --b-dur: 5.2s; animation-delay: 2.3s; --b-drift: 10px;" title="Tap to pop! 🎈">
-    <div class="balloon-shine"></div>
-    <div class="balloon-knot"></div>
-    <div class="balloon-string"></div>
-  </div>
-
-  <!-- Right Side Floating Balloons -->
-  <div class="festive-balloon b-mint" style="top: 27%; right: 7.5%; --b-w: 52px; --b-h: 66px; --b-dur: 6.2s; animation-delay: 0.7s; --b-drift: -12px;" title="Tap to pop! 🎈">
-    <div class="balloon-shine"></div>
-    <div class="balloon-knot"></div>
-    <div class="balloon-string"></div>
-  </div>
-  <div class="festive-balloon b-peach" style="top: 53%; right: 3.5%; --b-w: 46px; --b-h: 58px; --b-dur: 5.6s; animation-delay: 1.8s; --b-drift: 15px;" title="Tap to pop! 🎈">
-    <div class="balloon-shine"></div>
-    <div class="balloon-knot"></div>
-    <div class="balloon-string"></div>
-  </div>
-  <div class="festive-balloon b-rose" style="top: 77%; right: 7%; --b-w: 54px; --b-h: 68px; --b-dur: 7s; animation-delay: 2.9s; --b-drift: -10px;" title="Tap to pop! 🎈">
-    <div class="balloon-shine"></div>
-    <div class="balloon-knot"></div>
-    <div class="balloon-string"></div>
-  </div>
-</div>
-
 <div id="app">
   <!-- Top Bar -->
   <header id="topbar">
@@ -1400,13 +1225,8 @@
     </div>
   </header>
 
-  <!-- Festive Pennant Bunting - Connected String & Balloons -->
+  <!-- Festive Pennant Bunting - Connected String -->
   <div id="festive-bunting">
-    <div class="bunting-balloon-cluster bunting-balloon-left" title="Party Balloons!">
-      <div class="mini-cluster-balloon b-pink"></div>
-      <div class="mini-cluster-balloon b-gold"></div>
-      <div class="mini-cluster-balloon b-purple"></div>
-    </div>
     <svg class="bunting-cord" viewBox="0 0 1000 40" preserveAspectRatio="none">
       <path d="M 10 8 Q 250 30 500 15 Q 750 30 990 8" fill="none" stroke="rgba(245, 207, 115, 0.75)" stroke-width="2.5" stroke-dasharray="6,4" />
     </svg>
@@ -1420,11 +1240,6 @@
       <div class="bunting-flag" style="background:#ffeaa7; animation-delay:0.15s;"></div>
       <div class="bunting-flag" style="background:#ff7675; animation-delay:0.35s;"></div>
       <div class="bunting-flag" style="background:#00cec9; animation-delay:0.25s;"></div>
-    </div>
-    <div class="bunting-balloon-cluster bunting-balloon-right" title="Party Balloons!">
-      <div class="mini-cluster-balloon b-teal"></div>
-      <div class="mini-cluster-balloon b-pink"></div>
-      <div class="mini-cluster-balloon b-gold"></div>
     </div>
   </div>
 
@@ -2723,98 +2538,6 @@ if (cBtn) {
   });
 }
 
-/* =========================================================================
-   FESTIVE BALLOONS EVERYWHERE (Interactive, Poppable & Gentle Drifters)
-   ========================================================================= */
-function initFestiveBalloons() {
-  const container = document.getElementById('ambient-balloons-container');
-  if (!container) return;
-
-  function popBalloon(el, isDrifter = false) {
-    sounds.balloonPop();
-    el.classList.add('popping');
-
-    const rect = el.getBoundingClientRect();
-    const originX = (rect.left + rect.width / 2) / window.innerWidth;
-    const originY = (rect.top + rect.height / 2) / window.innerHeight;
-
-    if (window.confetti) {
-      confetti({
-        particleCount: 22,
-        spread: 55,
-        origin: { x: originX, y: originY },
-        colors: ['#ff7675', '#f5cf73', '#a29bfe', '#81ecec', '#fab1a0', '#fff']
-      });
-    }
-
-    if (isDrifter) {
-      setTimeout(() => el.remove(), 240);
-    } else {
-      setTimeout(() => {
-        el.classList.remove('popping');
-        el.style.animation = 'pop-in 0.5s ease-out forwards, balloon-bob var(--b-dur, 6s) infinite ease-in-out alternate';
-      }, 2200);
-    }
-  }
-
-  // Attach click listener to anchored balloons
-  document.querySelectorAll('.festive-balloon').forEach(b => {
-    b.addEventListener('click', (e) => {
-      e.stopPropagation();
-      popBalloon(b, false);
-    });
-  });
-
-  // Spawn gentle rising drifter balloons across the background
-  const balloonThemes = [
-    { bg: 'radial-gradient(circle at 35% 28%, #ffffff 0%, #ff6584 45%, #c4294a 100%)', glow: 'rgba(255,101,132,0.45)' },
-    { bg: 'radial-gradient(circle at 35% 28%, #ffffff 0%, #f5cf73 45%, #b8860b 100%)', glow: 'rgba(245,207,115,0.45)' },
-    { bg: 'radial-gradient(circle at 35% 28%, #ffffff 0%, #cbb7f0 45%, #6c5ce7 100%)', glow: 'rgba(162,155,254,0.45)' },
-    { bg: 'radial-gradient(circle at 35% 28%, #ffffff 0%, #81ecec 45%, #00cec9 100%)', glow: 'rgba(129,236,236,0.45)' },
-    { bg: 'radial-gradient(circle at 35% 28%, #ffffff 0%, #fab1a0 45%, #e17055 100%)', glow: 'rgba(250,177,160,0.45)' }
-  ];
-
-  function spawnDrifter() {
-    if (container.querySelectorAll('.ambient-drifter').length >= 4) return;
-
-    const d = document.createElement('div');
-    d.className = 'ambient-drifter';
-    const theme = balloonThemes[Math.floor(Math.random() * balloonThemes.length)];
-    const size = Math.floor(Math.random() * 16) + 44; // 44px - 60px
-    const leftPercent = Math.random() < 0.5 ? (Math.random() * 18 + 4) : (Math.random() * 18 + 78);
-    const duration = Math.random() * 5 + 11; // 11s - 16s float
-
-    d.style.width = `${size}px`;
-    d.style.height = `${Math.round(size * 1.28)}px`;
-    d.style.left = `${leftPercent}%`;
-    d.style.background = theme.bg;
-    d.style.boxShadow = `inset -4px -6px 12px rgba(0,0,0,0.32), inset 4px 5px 10px rgba(255,255,255,0.4), 0 10px 25px rgba(0,0,0,0.4), 0 0 20px ${theme.glow}`;
-    d.style.animationDuration = `${duration}s`;
-    d.title = 'Tap to pop! 🎈';
-
-    d.innerHTML = `
-      <div class="balloon-shine"></div>
-      <div class="balloon-knot"></div>
-      <div class="balloon-string"></div>
-    `;
-
-    d.addEventListener('click', (e) => {
-      e.stopPropagation();
-      popBalloon(d, true);
-    });
-
-    container.appendChild(d);
-
-    setTimeout(() => {
-      if (d.parentNode) d.remove();
-    }, duration * 1000 + 400);
-  }
-
-  setInterval(spawnDrifter, 3800);
-  spawnDrifter();
-}
-initFestiveBalloons();
-
 /* Keyboard arrow navigation support */
 window.addEventListener('keydown', (e) => {
   if (e.key === 'ArrowRight') nextBtn.click();
@@ -2822,7 +2545,7 @@ window.addEventListener('keydown', (e) => {
 });
 
 /* =========================================================================
-   GOLDEN SPARKLER MOUSE / TOUCH TRAIL (Magical Interactive Particle Sparks)
+   GOLDEN SPARKLER MOUSE / TOUCH TRAIL & PHOTO BUBBLE SPARKLERS
    ========================================================================= */
 (function initSparklerTrail() {
   const canvas = document.getElementById('sparkler-trail-canvas');
@@ -2844,14 +2567,16 @@ window.addEventListener('keydown', (e) => {
       sparks.push({
         x: x + (Math.random() * 10 - 5),
         y: y + (Math.random() * 10 - 5),
-        vx: (Math.random() - 0.5) * 2.2,
-        vy: (Math.random() - 0.5) * 2.2 + 0.5,
+        vx: (Math.random() - 0.5) * 2.5,
+        vy: (Math.random() - 0.5) * 2.5 + 0.5,
         size: Math.random() * 2.4 + 1.2,
         alpha: 1,
         color: colors[Math.floor(Math.random() * colors.length)]
       });
     }
   }
+
+  window.addSpark = addSpark;
 
   window.addEventListener('mousemove', (e) => addSpark(e.clientX, e.clientY));
   window.addEventListener('touchmove', (e) => {
@@ -2885,6 +2610,86 @@ window.addEventListener('keydown', (e) => {
   }
   requestAnimationFrame(renderTrail);
 })();
+
+/* =========================================================================
+   PHOTO BUBBLE SPARKLERS (Sparkler Effect & Interactive Zoom on Hover)
+   ========================================================================= */
+function initPhotoSparklers() {
+  const bubbles = document.querySelectorAll('.bg-photo-bubble');
+  if (!bubbles.length) return;
+
+  bubbles.forEach(bubble => {
+    let sparkInterval = null;
+
+    function emitBorderSparks() {
+      const rect = bubble.getBoundingClientRect();
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+      const r = rect.width / 2;
+
+      // Spray golden sparkler sparks around the photo perimeter
+      for (let i = 0; i < 5; i++) {
+        const theta = Math.random() * Math.PI * 2;
+        const offset = r + (Math.random() * 14 - 6);
+        const px = cx + Math.cos(theta) * offset;
+        const py = cy + Math.sin(theta) * offset;
+        if (typeof window.addSpark === 'function') {
+          window.addSpark(px, py);
+        }
+      }
+      if (Math.random() < 0.35 && typeof sounds !== 'undefined' && sounds.sparklerCrackle) {
+        sounds.sparklerCrackle();
+      }
+    }
+
+    bubble.addEventListener('mouseenter', () => {
+      clearInterval(sparkInterval);
+      emitBorderSparks();
+      sparkInterval = setInterval(emitBorderSparks, 60);
+    });
+
+    bubble.addEventListener('mousemove', (e) => {
+      if (typeof window.addSpark === 'function') {
+        window.addSpark(e.clientX, e.clientY);
+      }
+    });
+
+    bubble.addEventListener('mouseleave', () => {
+      clearInterval(sparkInterval);
+    });
+
+    // Touch support for mobile devices
+    bubble.addEventListener('touchstart', () => {
+      clearInterval(sparkInterval);
+      emitBorderSparks();
+      sparkInterval = setInterval(emitBorderSparks, 60);
+    }, { passive: true });
+
+    bubble.addEventListener('touchend', () => {
+      clearInterval(sparkInterval);
+    }, { passive: true });
+
+    // Click / Tap celebratory chime with confetti
+    bubble.addEventListener('click', (e) => {
+      e.stopPropagation();
+      if (typeof sounds !== 'undefined' && sounds.chime) sounds.chime();
+      const rect = bubble.getBoundingClientRect();
+      const originX = (rect.left + rect.width / 2) / window.innerWidth;
+      const originY = (rect.top + rect.height / 2) / window.innerHeight;
+
+      if (window.confetti) {
+        confetti({
+          particleCount: 40,
+          spread: 75,
+          origin: { x: originX, y: originY },
+          colors: ['#ffeaa7', '#ffd700', '#ff7675', '#ffffff', '#a29bfe']
+        });
+      }
+      showToast("✨ Cherished Memory ✨", "💖");
+    });
+  });
+}
+initPhotoSparklers();
 </script>
 </body>
 </html>
