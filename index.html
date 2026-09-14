@@ -68,7 +68,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: calc(env(safe-area-inset-top, 0px) + 12px) 20px 8px;
+    padding: calc(env(safe-area-inset-top, 0px) + 26px) 22px 6px;
     z-index: 10;
   }
 
@@ -127,7 +127,6 @@
     gap: 7px;
     padding: 2px 20px 6px;
     z-index: 10;
-    top: ;
   }
   .dot {
     width: 22px;
@@ -786,15 +785,32 @@
     height: 100%;
     object-fit: cover;
     display: block;
+    transform: scale(1);
+    transition: transform 1.5s cubic-bezier(0.2, 0.85, 0.25, 1);
+  }
+  .love-success-photo:hover img {
+    transform: scale(1.09);
   }
   @keyframes pop-in {
     from { opacity: 0; transform: scale(0.7); }
     to { opacity: 1; transform: scale(1); }
   }
 
-  /* Ambient Floating Memory Photo Bubbles (Interactive, Slow Elegant Hover Zoom & Sparklers) */
-  .bg-photo-bubble {
+  /* Ambient Floating Memory Photo Wrapper (Gentle floating motion) */
+  .bg-photo-wrapper {
     position: fixed;
+    z-index: 30;
+    pointer-events: auto;
+    animation: bubble-float var(--float-dur, 7s) infinite ease-in-out alternate;
+    animation-delay: var(--float-delay, 0s);
+    will-change: transform;
+  }
+  .bg-photo-wrapper:hover {
+    z-index: 60;
+  }
+
+  /* Ambient Floating Memory Photo Bubbles (Slow, Silky-Smooth Hover Expansion) */
+  .bg-photo-bubble {
     width: clamp(120px, 11vw, 145px);
     height: clamp(120px, 11vw, 145px);
     border-radius: 50%;
@@ -803,10 +819,13 @@
     overflow: hidden;
     pointer-events: auto; /* Clickable & Hoverable */
     cursor: pointer;
-    z-index: 30; /* STRICTLY above all background balloons (z-index: 2) */
     opacity: 0.95;
-    animation: bubble-float 7s infinite ease-in-out alternate;
-    transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.85s cubic-bezier(0.22, 1, 0.36, 1), border-color 0.6s ease, filter 0.6s ease;
+    position: relative;
+    transform: scale(1);
+    transition: transform 1.6s cubic-bezier(0.2, 0.85, 0.25, 1),
+                box-shadow 1.4s cubic-bezier(0.2, 0.85, 0.25, 1),
+                border-color 0.8s ease,
+                filter 0.8s ease;
     will-change: transform, box-shadow;
   }
   .bg-photo-bubble::before {
@@ -816,13 +835,13 @@
     background: linear-gradient(115deg, transparent 40%, rgba(255, 255, 255, 0.7) 50%, transparent 60%);
     transform: rotate(25deg);
     opacity: 0;
-    transition: opacity 0.5s ease;
+    transition: opacity 0.8s ease;
     pointer-events: none;
     z-index: 3;
   }
+  .bg-photo-wrapper:hover .bg-photo-bubble,
   .bg-photo-bubble:hover {
-    transform: scale(1.32) !important;
-    animation-play-state: paused;
+    transform: scale(1.36);
     border-color: #fff275;
     border-width: 4px;
     box-shadow: 
@@ -831,8 +850,8 @@
       0 0 100px rgba(255, 101, 132, 0.65), 
       inset 0 0 25px rgba(255, 255, 255, 0.85);
     filter: saturate(1.25) brightness(1.1);
-    z-index: 60;
   }
+  .bg-photo-wrapper:hover .bg-photo-bubble::before,
   .bg-photo-bubble:hover::before {
     opacity: 1;
     animation: sparkle-sweep 1.4s infinite linear;
@@ -846,10 +865,12 @@
     height: 100%;
     object-fit: cover;
     filter: saturate(1.15) brightness(1.02);
-    transition: transform 0.85s cubic-bezier(0.22, 1, 0.36, 1);
+    transform: scale(1);
+    transition: transform 1.8s cubic-bezier(0.2, 0.85, 0.25, 1);
   }
+  .bg-photo-wrapper:hover .bg-photo-bubble img,
   .bg-photo-bubble:hover img {
-    transform: scale(1.08);
+    transform: scale(1.12);
   }
   @media (max-width: 600px) {
     .bg-photo-bubble {
@@ -859,8 +880,8 @@
     }
   }
   @keyframes bubble-float {
-    0% { transform: translateY(0) scale(1) rotate(0deg); }
-    100% { transform: translateY(-24px) scale(1.06) rotate(5deg); }
+    0% { transform: translateY(0) rotate(0deg); }
+    100% { transform: translateY(-22px) rotate(4deg); }
   }
 
   /* ---------------- STAGE 4: SCRATCH CARD (ENLARGED & DELUXE) ---------------- */
@@ -945,10 +966,11 @@
     object-fit: cover;
     display: block;
     border-radius: 4px;
-    transition: transform 0.35s ease;
+    transform: scale(1);
+    transition: transform 1.5s cubic-bezier(0.2, 0.85, 0.25, 1);
   }
   .polaroid-card:hover .polaroid-photo img {
-    transform: scale(1.04);
+    transform: scale(1.08);
   }
   .polaroid-caption {
     margin-top: 10px;
@@ -989,6 +1011,11 @@
     height: 100%;
     object-fit: cover;
     display: block;
+    transform: scale(1);
+    transition: transform 1.5s cubic-bezier(0.2, 0.85, 0.25, 1);
+  }
+  .finale-portrait-frame:hover img {
+    transform: scale(1.1);
   }
   .grand-title {
     font-family: 'Cinzel Decorative', 'Fraunces', serif;
@@ -1082,7 +1109,7 @@
   /* Festive Bunting Banner across top - Connected String & Balloons */
   #festive-bunting {
     position: absolute;
-    top: 46px;
+    top: 0;
     left: 0;
     width: 100%;
     pointer-events: none;
@@ -1098,7 +1125,7 @@
     top: 0;
     left: 0;
     width: 100%;
-    height: 38px;
+    height: 28px;
     pointer-events: none;
     z-index: 1;
   }
@@ -1107,7 +1134,7 @@
     width: 100%;
     display: flex;
     justify-content: space-around;
-    padding: 6px 36px 0;
+    padding: 2px 40px 0;
     z-index: 2;
   }
 
@@ -1336,18 +1363,26 @@
 <div id="transition-celebration-layer"></div>
 <div id="toast"><span id="toast-icon">✨</span><span id="toast-text">Ready!</span></div>
 
-<!-- Ambient Floating Memory Photo Bubbles -->
-<div class="bg-photo-bubble" style="top: 8%; left: 3%; animation-duration: 7s;">
-  <img src="https://res.cloudinary.com/kalichatbot/image/upload/v1789407294/WhatsApp_Image_2026-09-14_at_10.55.16_PM_1_fjma8x.jpg" alt="Memory Bubble 1">
+<!-- Ambient Floating Memory Photo Bubbles with Slow Luxurious Expansion -->
+<div class="bg-photo-wrapper" style="top: clamp(75px, 8.5vh, 90px); left: 3%; --float-dur: 7s; --float-delay: 0s;">
+  <div class="bg-photo-bubble">
+    <img src="https://res.cloudinary.com/kalichatbot/image/upload/v1789407294/WhatsApp_Image_2026-09-14_at_10.55.16_PM_1_fjma8x.jpg" alt="Memory Bubble 1">
+  </div>
 </div>
-<div class="bg-photo-bubble" style="top: 13%; right: 4%; animation-duration: 8.5s; animation-delay: 1.2s;">
-  <img src="https://res.cloudinary.com/kalichatbot/image/upload/v1789407295/WhatsApp_Image_2026-09-14_at_10.55.17_PM_2_jdfo9b.jpg" alt="Memory Bubble 2">
+<div class="bg-photo-wrapper" style="top: clamp(85px, 12vh, 120px); right: 4%; --float-dur: 8.5s; --float-delay: 1.2s;">
+  <div class="bg-photo-bubble">
+    <img src="https://res.cloudinary.com/kalichatbot/image/upload/v1789407295/WhatsApp_Image_2026-09-14_at_10.55.17_PM_2_jdfo9b.jpg" alt="Memory Bubble 2">
+  </div>
 </div>
-<div class="bg-photo-bubble" style="bottom: 11%; left: 4%; animation-duration: 9s; animation-delay: 0.6s;">
-  <img src="https://res.cloudinary.com/kalichatbot/image/upload/v1789407294/WhatsApp_Image_2026-09-14_at_10.55.16_PM_cqgmfu.jpg" alt="Memory Bubble 3">
+<div class="bg-photo-wrapper" style="bottom: 11%; left: 4%; --float-dur: 9s; --float-delay: 0.6s;">
+  <div class="bg-photo-bubble">
+    <img src="https://res.cloudinary.com/kalichatbot/image/upload/v1789407294/WhatsApp_Image_2026-09-14_at_10.55.16_PM_cqgmfu.jpg" alt="Memory Bubble 3">
+  </div>
 </div>
-<div class="bg-photo-bubble" style="bottom: 15%; right: 4%; animation-duration: 7.8s; animation-delay: 2s;">
-  <img src="https://res.cloudinary.com/kalichatbot/image/upload/v1789407293/WhatsApp_Image_2026-09-14_at_10.55.20_PM_alu7uk.jpg" alt="Memory Bubble 4">
+<div class="bg-photo-wrapper" style="bottom: 15%; right: 4%; --float-dur: 7.8s; --float-delay: 2s;">
+  <div class="bg-photo-bubble">
+    <img src="https://res.cloudinary.com/kalichatbot/image/upload/v1789407293/WhatsApp_Image_2026-09-14_at_10.55.20_PM_alu7uk.jpg" alt="Memory Bubble 4">
+  </div>
 </div>
 
 <!-- Ambient Balloons Layer (Strictly behind photos at z-index: 2, safely positioned away from photos) -->
@@ -1413,8 +1448,8 @@
 
   <!-- Festive Pennant Bunting - Connected String -->
   <div id="festive-bunting">
-    <svg class="bunting-cord" viewBox="0 0 1000 40" preserveAspectRatio="none">
-      <path d="M 10 8 Q 250 30 500 15 Q 750 30 990 8" fill="none" stroke="rgba(245, 207, 115, 0.75)" stroke-width="2.5" stroke-dasharray="6,4" />
+    <svg class="bunting-cord" viewBox="0 0 1000 30" preserveAspectRatio="none">
+      <path d="M 0 2 Q 250 16 500 8 Q 750 16 1000 2" fill="none" stroke="rgba(245, 207, 115, 0.75)" stroke-width="2.2" stroke-dasharray="6,4" />
     </svg>
     <div class="bunting-flags-row">
       <div class="bunting-flag" style="background:#ff7675; animation-delay:0s;"></div>
@@ -1532,7 +1567,6 @@
         <p class="screen-subtitle">Let's see if you can ace these heartfelt questions 😉</p>
         
         <div class="quiz-box">
-          <div class="quiz-progress-line" id="quiz-progress-line"></div>
           <div class="quiz-question-text" id="quiz-question">Who is the cutest person reading this screen right now?</div>
           <div class="quiz-options-list" id="quiz-options">
             <button class="quiz-btn"><span>Obviously You 💖</span><span>✨</span></button>
@@ -2337,19 +2371,11 @@ if (relightBtn) {
    STAGE 2: TRIVIA / "US" QUIZ
    ========================================================================= */
 let currentQuizIdx = 0;
-const qLine = document.getElementById('quiz-progress-line');
 const qText = document.getElementById('quiz-question');
 const qOpts = document.getElementById('quiz-options');
 
 function initQuizSteps() {
-  if (!qLine || !CONFIG || !CONFIG.quizQuestions) return;
-  qLine.innerHTML = '';
-  CONFIG.quizQuestions.forEach(() => {
-    const step = document.createElement('div');
-    step.className = 'q-step';
-    step.innerHTML = `<div class="q-step-fill"></div>`;
-    qLine.appendChild(step);
-  });
+  // Quiz progress bar removed per request
 }
 initQuizSteps();
 
@@ -2373,10 +2399,6 @@ function renderQuiz() {
   qText.textContent = qData.q;
   qOpts.innerHTML = '';
 
-  const qStepFills = qLine ? qLine.querySelectorAll('.q-step-fill') : [];
-  if (qStepFills && qStepFills[currentQuizIdx]) {
-    qStepFills[currentQuizIdx].style.width = '100%';
-  }
 
   qData.options.forEach((opt, idx) => {
     const btn = document.createElement('button');
